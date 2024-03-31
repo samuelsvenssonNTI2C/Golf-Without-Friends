@@ -44,8 +44,11 @@ class Ball():
         y_movement = velocity*math.sin(direction)
         self.x += x_movement
         self.y -= y_movement
-        velocity -= 0.02
+        velocity -= 0.01
         return velocity
+    
+    def gravity(self, velocity):
+        self.y += velocity
         
     #draw object and save hitbox
     def update(self):

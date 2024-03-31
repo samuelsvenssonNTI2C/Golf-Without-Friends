@@ -15,10 +15,12 @@ class Game:
         golf_ball = Ball(self.screen, 100, 100)
         v, dir = 0, 0
         gravity = 0
-        fps = 60
+        collision_factor = 0.8
         map = Map(self.screen, json.load(open('maps.json'))['map_1'])
         
         while True:
+            fps = 60
+            
             self.screen.fill((0, 0, 0))
             map.draw()
             for event in pygame.event.get():
@@ -31,15 +33,8 @@ class Game:
                         if v == 0 and golf_ball.hitbox.collidepoint(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]):
                             golf_ball.selected = True
                             
-                    case pygame.KEYDOWN:
-                        if event.key == pygame.K_SPACE:
-                            fps = 600
-                            print("down")
-                            
-                    case pygame.KEYUP:
-                        if event.key == pygame.K_SPACE:
-                            fps = 60
-                            print("up")
+                    case pygame.K_SPACE:
+                        fps = 300
             
             
             # collision              
@@ -59,11 +54,12 @@ class Game:
                 on_ground = False
                 for line in lines:
                     if golf_ball.hitbox.clipline(line):
+                        v *= collision_factor
                         if line[0][0] == line[1][0]: # is vertical line
                             dir = math.pi - dir
                         else:
                             dir = -dir
-                            gravity = -gravity*0.8
+                            gravity = -gravity*collision_factor
                             on_ground = True
             
             if not on_ground:
