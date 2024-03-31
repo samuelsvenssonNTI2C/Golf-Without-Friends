@@ -11,8 +11,8 @@ class Ball():
         self.hitbox = pygame.Rect(self.x-self.radius, self.y-self.radius, self.radius*2, self.radius*2)
         
     def shoot(self):
-        velocity_factor = 0.002     # velocity factor
-        max_velocity = 0.3          # max velocity
+        velocity_factor = 0.03     # velocity factor
+        max_velocity = 4          # max velocity
         x, y = pygame.mouse.get_pos()
         # x, y offset from object
         rel_x = x - self.x
@@ -44,7 +44,7 @@ class Ball():
         y_movement = velocity*math.sin(direction)
         self.x += x_movement
         self.y -= y_movement
-        velocity -= 0.0001
+        velocity -= 0.02
         return velocity
         
     #draw object and save hitbox

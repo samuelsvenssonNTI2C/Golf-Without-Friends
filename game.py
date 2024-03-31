@@ -11,8 +11,10 @@ class Game:
         self.screen = pygame.display.set_mode((700,400))
         
     def run(self):
+        clock = pygame.time.Clock()
         golf_ball = Ball(self.screen, 100, 100)
         v, dir = 0, 0
+        gravity_velocity = 0
         map = Map(self.screen, json.load(open('maps.json'))['map_1'])
         
         while True:
@@ -49,17 +51,17 @@ class Game:
                             dir = math.pi - dir
                         else:
                             dir = -dir
-                    
+            
             if golf_ball.selected == True:
                 v, dir = golf_ball.shoot()
-                print(v, math.degrees(dir))
             
             if v > 0:
                 v = golf_ball.move(v, dir)
             else:
                 v = 0
-                  
             golf_ball.update()
             pygame.display.update()
+            
+            clock.tick(60)      # sets framerate to 60 fps 
 
 Game().run()
