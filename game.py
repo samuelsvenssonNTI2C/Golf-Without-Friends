@@ -16,6 +16,7 @@ class Game:
         v, dir = 0, 0
         gravity = 0
         fps = 60
+        on_ground = False
         map = Map(self.screen, json.load(open('maps.json'))['map_1'])
         
         while True:
@@ -34,17 +35,17 @@ class Game:
                     case pygame.KEYDOWN:
                         if event.key == pygame.K_SPACE:
                             fps = 600
-                            print("down")
                             
                     case pygame.KEYUP:
                         if event.key == pygame.K_SPACE:
                             fps = 60
-                            print("up")
             
             
-            # collision              
-            for rect in map.hitboxes:
-                x, y, w, h = rect
+            # collision
+            on_ground = False      
+            rect = golf_ball.hitbox.collidelist(map.hitboxes)
+            if rect != -1:
+                x, y, w, h = map.hitboxes[rect]
                 x1, y1 = x, y
                 x2, y2 = x + w, y
                 x3, y3 = x, y + h
@@ -56,7 +57,6 @@ class Game:
                     ((x2, y2), (x4, y4)),
                     ((x3, y3), (x4, y4))]
                 
-                on_ground = False
                 for line in lines:
                     if golf_ball.hitbox.clipline(line):
                         if line[0][0] == line[1][0]: # is vertical line
