@@ -4,7 +4,7 @@ class Map:
     materials = {
         "grass": {
             "color": (0, 255, 0),
-            "friction": 0.05
+            "friction": 0.1
         },
         "ice": {
             "color": (200, 200, 255),

@@ -19,10 +19,11 @@ class Ball():
         self.colliding = 0      # -1 -> horizontal, 0 -> no, 1 -> vertical
         self.collison_velocity_loss = 0.4
         self.resultant = [0, 0]
+        self.has_collided_with = -1
         
     def shoot(self):
-        velocity_factor = 0.06
-        max_strength = 5          # max velocity
+        velocity_factor = 0.03
+        max_strength = 4          # max velocity
         x, y = pygame.mouse.get_pos()
         # x, y offset from object
         rel_x = (x - self.x)*velocity_factor
@@ -42,8 +43,7 @@ class Ball():
         # release shoot
         if pygame.mouse.get_pressed(3)[0] == False:
             self.selected = False
-            self.vectors["velocity"] = [-rel_x, rel_y]
-            print(self.vectors["velocity"])
+            self.vectors["velocity"] = [-rel_x, -rel_y]
     
     # movement of object
     def move(self):
@@ -56,7 +56,7 @@ class Ball():
         elif self.colliding == -1:
             self.resultant[1] *= -(1-self.collison_velocity_loss)
         
-        if math.hypot(self.resultant[0], self.resultant[1]) < 0.01:
+        if math.hypot(self.resultant[0], self.resultant[1]) < 0.01 or (self.has_collided_with != -1 and math.hypot(self.resultant[0], self.resultant[1]) <= 0.3):
             self.resultant = [0, 0]
             
         self.x += self.resultant[0]
@@ -72,7 +72,7 @@ class Ball():
     
     def friction(self, friction):
         self.resultant[0] *= (1-friction)
-        #self.resultant[1] *= (1-friction)
+        self.resultant[1] *= (1-friction)
     
     def collision(self, vertical):
         if vertical:
