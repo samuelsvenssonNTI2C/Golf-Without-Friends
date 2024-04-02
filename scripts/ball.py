@@ -21,6 +21,7 @@ class Ball():
         self.resultant = [0, 0]
         self.has_collided_with = -1
         
+    # controls the shootong of the ball and adds a velocity vector to the ball
     def shoot(self):
         velocity_factor = 0.03
         max_strength = 4          # max velocity
@@ -63,13 +64,15 @@ class Ball():
         self.y += self.resultant[1]
         
         self.vectors["velocity"] = [0, 0]
-        
+    
+    # adds a gravity vector to the ball
     def gravity(self):
         if not self.on_ground:
             self.vectors["gravity"][1] = 0.03     # gravity acceleration in px/frame
         else:
             self.vectors["gravity"][1] = 0
     
+    # reduces tha balls speed based on object it contacts
     def friction(self, friction):
         self.resultant[0] *= (1-friction)
         self.resultant[1] *= (1-friction)
