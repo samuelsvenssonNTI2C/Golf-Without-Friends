@@ -3,19 +3,23 @@
         "objects": [
             {
                 "cordinates": [120, 120, 50, 50],
-                "color": [255, 255, 255]
+                "color": [255, 255, 255],
+                "type": "grass"
             },
             {
                 "cordinates": [220, 220, 50, 50],
-                "color": [255, 255, 255]
+                "color": [255, 255, 255],
+                "type": "ice"
             },
             {
                 "cordinates": [520, 220, 10, 50],
-                "color": [255, 255, 255]
+                "color": [255, 255, 255],
+                "type": "grass"
             },
             {
                 "cordinates": [0, 370, 700, 100],
-                "color": [0, 255, 0]
+                "color": [0, 255, 0],
+                "type": "grass"
             }
         ]
     }

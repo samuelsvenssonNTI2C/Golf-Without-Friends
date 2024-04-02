@@ -17,7 +17,8 @@ class Game:
         gravity = 0
         fps = 60
         on_ground = False
-        map = Map(self.screen, json.load(open('maps.json'))['map_1'])
+        maps = json.load(open('maps.json'))['map_1']
+        map = Map(self.screen, maps)
         
         while True:
             self.screen.fill((0, 0, 0))
@@ -29,7 +30,7 @@ class Game:
                         sys.exit()
                     
                     case pygame.MOUSEBUTTONDOWN:
-                        if v == 0 and golf_ball.hitbox.collidepoint(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]):
+                        if golf_ball.resultant == [0, 0] and golf_ball.hitbox.collidepoint(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]):
                             golf_ball.selected = True
                             
                     case pygame.KEYDOWN:
@@ -41,10 +42,19 @@ class Game:
                             fps = 60
             
             
+            
+            
+            if golf_ball.selected == True:
+                golf_ball.shoot()
+                
+            golf_ball.gravity()    
+            
             # collision
-            on_ground = False      
+            golf_ball.on_ground = False
+            golf_ball.colliding = 0
             rect = golf_ball.hitbox.collidelist(map.hitboxes)
             if rect != -1:
+                golf_ball.friction(map.materials[maps['objects'][rect]['type']]['friction'])
                 x, y, w, h = map.hitboxes[rect]
                 x1, y1 = x, y
                 x2, y2 = x + w, y
@@ -59,25 +69,11 @@ class Game:
                 
                 for line in lines:
                     if golf_ball.hitbox.clipline(line):
-                        if line[0][0] == line[1][0]: # is vertical line
-                            dir = math.pi - dir
-                        else:
-                            dir = -dir
-                            gravity = -gravity*0.8
-                            on_ground = True
+                        golf_ball.collision(line[0][0] == line[1][0])
+                        break
+                    
+            golf_ball.move()
             
-            if not on_ground:
-                gravity += 0.01
-            
-            golf_ball.gravity(gravity)
-            
-            if golf_ball.selected == True:
-                v, dir = golf_ball.shoot()
-            
-            if v > 0:
-                v = golf_ball.move(v, dir)
-            else:
-                v = 0
             golf_ball.update()
             pygame.display.update()
             
