@@ -8,16 +8,15 @@ from scripts.map import Map
 class Game:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((700,400))
-        
+        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     def run(self):
         clock = pygame.time.Clock()
         golf_ball = Ball(self.screen, 100, 100)
         normal_fps = 60
         fast_fps = 600
         fps = normal_fps
-        maps = json.load(open('maps.json'))['map_1']
-        map = Map(self.screen, maps)
+        maps = json.load(open('maps.json'))
+        map = Map(self.screen, maps['map_1'])
         
         while True:
             self.screen.fill((0, 0, 0))
@@ -39,10 +38,11 @@ class Game:
                     case pygame.KEYUP:
                         if event.key == pygame.K_SPACE:
                             fps = normal_fps
-            
-            
-            
-            
+                            
+                        if event.key == pygame.K_TAB:
+                            print('next map')
+                            map = Map(self.screen, maps['map_2'])
+                            
             if golf_ball.selected == True:
                 golf_ball.shoot()
                 
@@ -53,7 +53,7 @@ class Game:
             golf_ball.colliding = 0
             rect = golf_ball.hitbox.collidelist(map.hitboxes)
             if rect != -1 and golf_ball.has_collided_with != rect:
-                golf_ball.friction(map.materials[maps['objects'][rect]['type']]['friction'])
+                golf_ball.friction(map.materials[map.map['objects'][rect]['type']]['friction'])
                 x, y, w, h = map.hitboxes[rect]
                 x1, y1 = x, y
                 x2, y2 = x + w, y
@@ -70,8 +70,8 @@ class Game:
                     if golf_ball.hitbox.clipline(line):
                         golf_ball.collision(line[0][0] == line[1][0])
                         break
-            golf_ball.has_collided_with = rect
-                    
+            golf_ball.has_collided_with = rect                    
+            
             golf_ball.move()
             
             golf_ball.update()

@@ -7,7 +7,7 @@ class Ball():
         self.y = start_y
         self.screen = screen
         self.selected = False
-        self.radius = 10
+        self.radius = self.screen.get_width() * 0.01
         self.hitbox = pygame.Rect(self.x-self.radius, self.y-self.radius, self.radius*2, self.radius*2)
         self.vectors = {
             "gravity": [0, 0],
@@ -23,8 +23,8 @@ class Ball():
         
     # controls the shootong of the ball and adds a velocity vector to the ball
     def shoot(self):
-        velocity_factor = 0.03
-        max_strength = 4          # max velocity
+        velocity_factor = 0.06
+        max_strength = 6          # max velocity
         x, y = pygame.mouse.get_pos()
         # x, y offset from object
         rel_x = (x - self.x)*velocity_factor
@@ -68,7 +68,7 @@ class Ball():
     # adds a gravity vector to the ball
     def gravity(self):
         if not self.on_ground:
-            self.vectors["gravity"][1] = 0.03     # gravity acceleration in px/frame
+            self.vectors["gravity"][1] = 0.07     # gravity acceleration in px/frame
         else:
             self.vectors["gravity"][1] = 0
     
