@@ -8,7 +8,7 @@ from scripts.map import Map
 class Game:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        self.screen = pygame.display.set_mode((256, 144))
     def run(self):
         clock = pygame.time.Clock()
         golf_ball = Ball(self.screen, 100, 100)
@@ -53,13 +53,13 @@ class Game:
             golf_ball.colliding = 0
             rect = golf_ball.hitbox.collidelist(map.hitboxes)
             if rect != -1 and golf_ball.has_collided_with != rect:
-                golf_ball.friction(map.materials[map.map['objects'][rect]['type']]['friction'])
+                golf_ball.friction(map.materials[map.map['blocks'][rect]['type']]['friction'])
                 x, y, w, h = map.hitboxes[rect]
                 x1, y1 = x, y
                 x2, y2 = x + w, y
                 x3, y3 = x, y + h
                 x4, y4 = x + w, y + h
-
+ 
                 lines = [
                     ((x1, y1), (x2, y2)),
                     ((x1, y1), (x3, y3)),
@@ -75,6 +75,9 @@ class Game:
             golf_ball.move()
             
             golf_ball.update()
+            
+            
+            
             pygame.display.update()
             
             clock.tick(fps)      # sets framerate to 60 fps 

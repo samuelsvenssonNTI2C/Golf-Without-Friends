@@ -17,7 +17,7 @@ class Ball():
         
         self.on_ground = False
         self.colliding = 0      # -1 -> horizontal, 0 -> no, 1 -> vertical
-        self.collison_velocity_loss = 0.4
+        self.collison_velocity_loss = 0.5
         self.resultant = [0, 0]
         self.has_collided_with = -1
         

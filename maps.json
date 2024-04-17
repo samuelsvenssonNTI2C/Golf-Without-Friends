@@ -1,74 +1,15 @@
 {
     "map_1": {
-        "objects": [
+        "blocks": [
             {
-                "_comment": "Top border",
-                "fractions": [0, 0, 1, 0.01],
-                "color": [255, 255, 255],
+                "position": [1,3],
                 "type": "grass"
             },
             {
-                "_comment": "Right border",
-                "fractions": [1, 0, -0.01, 1],
-                "color": [255, 255, 255],
-                "type": "grass"
-            },
-            {
-                "_comment": "Bottom border / Ground",
-                "fractions": [0, 1, 1, -0.15],
-                "color": [255, 255, 255],
-                "type": "grass"
-            },
-            {
-                "_comment": "Left border",
-                "fractions": [0, 0, 0.01, 1],
-                "color": [255, 255, 255],
-                "type": "grass"
-            },
-            {
-                "fractions": [0.1, 0.1, 0.05, 0.05],
-                "color": [255, 255, 255],
-                "type": "grass"
-            },
-            {
-                "fractions": [0.3, 0.3, 0.05, 0.05],
-                "color": [255, 255, 255],
+                "position": [5,7],
                 "type": "ice"
-            },
-            {
-                "fractions": [0.5, 0.5, 0.01, 0.05],
-                "color": [255, 255, 255],
-                "type": "grass"
             }
-        ]
-    },
-
-    "map_2": {
-        "objects": [
-            {
-                "_comment": "Top border",
-                "fractions": [0, 0, 1, 0.01],
-                "color": [255, 255, 255],
-                "type": "grass"
-            },
-            {
-                "_comment": "Right border",
-                "fractions": [1, 0, -0.01, 1],
-                "color": [255, 255, 255],
-                "type": "grass"
-            },
-            {
-                "_comment": "Bottom border / Ground",
-                "fractions": [0, 1, 1, -0.15],
-                "color": [255, 255, 255],
-                "type": "grass"
-            },
-            {
-                "_comment": "Left border",
-                "fractions": [0, 0, 0.01, 1],
-                "color": [255, 255, 255],
-                "type": "grass"
-            }
-        ]
+        ],
+        "goal": "WIP"
     }
 }

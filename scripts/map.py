@@ -3,12 +3,12 @@ import pygame
 class Map:
     materials = {
         "grass": {
-            "color": (0, 255, 0),
-            "friction": 0.1
+            "friction": 0.15,
+            "texture": pygame.image.load('textures/grass.png')
         },
         "ice": {
-            "color": (200, 200, 255),
-            "friction": 0.02
+            "friction": 0.02,
+            "texture": pygame.image.load('textures/grass.png')
         }
     }
     
@@ -16,15 +16,12 @@ class Map:
         self.screen = screen
         self.map = dict
         self.hitboxes = []
-        for self.map_object in self.map['objects']:
-            fractions = self.map_object['fractions']
-            cordinates = pygame.Rect([fractions[0]*self.screen.get_width(), fractions[1]*self.screen.get_height(), fractions[2]*self.screen.get_width(), fractions[3]*self.screen.get_height()])
-            cordinates.normalize()
-            self.hitboxes.append(cordinates)
-        
+        self.textures = []
+        for map_object in self.map['blocks']:            
+            rect = pygame.Rect([map_object['position'][0]*16, map_object['position'][1]*16, 16, 16])
+            self.hitboxes.append(rect)
+            self.textures.append(Map.materials[map_object['type']]['texture'])
+            
     def draw(self):
-        for self.map_object in self.map['objects']:
-            fractions = self.map_object['fractions']
-            cordinates = pygame.Rect([fractions[0]*self.screen.get_width(), fractions[1]*self.screen.get_height(), fractions[2]*self.screen.get_width(), fractions[3]*self.screen.get_height()])
-            cordinates.normalize()
-            pygame.draw.rect(self.screen, Map.materials[self.map_object['type']]['color'], cordinates)
+        for object in self.hitboxes:
+            self.screen.blit(self.textures[self.hitboxes.index(object)], (object[0], object[1]))
