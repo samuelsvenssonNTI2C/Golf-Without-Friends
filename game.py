@@ -18,7 +18,7 @@ class Game:
         fast_fps = 600
         fps = normal_fps
         maps = json.load(open('maps.json'))
-        map = Map(self.screen, maps['map_1'])
+        map = Map(self.screen, maps[0])
         self.sideview = True
         
         while True:
@@ -49,7 +49,7 @@ class Game:
                             
                         if event.key == pygame.K_TAB:
                             print('next map')
-                            map = Map(self.screen, maps['map_2'])
+                            map = Map(self.screen, maps[1])
                             
             
                 
