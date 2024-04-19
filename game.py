@@ -10,18 +10,19 @@ class Game:
         pygame.init()
         self.screen = pygame.Surface((256, 144))
         self.display = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        self.scale = self.display.get_width() / self.screen.get_width()
     def run(self):
         clock = pygame.time.Clock()
-        golf_ball = Ball(self.screen, 100, 100)
+        golf_ball = Ball(self.screen, self.scale, 100.5, 100.5)
         normal_fps = 60
         fast_fps = 600
         fps = normal_fps
         maps = json.load(open('maps.json'))
         map = Map(self.screen, maps['map_1'])
+        self.sideview = True
         
         while True:
             self.screen.fill((100, 100, 100))
-            map.draw()
             for event in pygame.event.get():
                 match event.type:
                     case pygame.QUIT:
@@ -29,7 +30,7 @@ class Game:
                         sys.exit()
                     
                     case pygame.MOUSEBUTTONDOWN:
-                        if golf_ball.resultant == [0, 0] and golf_ball.hitbox.collidepoint(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]):
+                        if golf_ball.resultant == [0, 0] and golf_ball.hitbox.collidepoint(pygame.mouse.get_pos()[0]/self.scale, pygame.mouse.get_pos()[1]/self.scale):
                             golf_ball.selected = True
                             
                     case pygame.KEYDOWN:
@@ -39,23 +40,38 @@ class Game:
                     case pygame.KEYUP:
                         if event.key == pygame.K_SPACE:
                             fps = normal_fps
+                        if event.key == pygame.K_ESCAPE:
+                            pygame.quit()
+                            sys.exit()
+                        if event.key == pygame.K_f:
+                            self.sideview = not self.sideview
+                            print("test")
                             
                         if event.key == pygame.K_TAB:
                             print('next map')
                             map = Map(self.screen, maps['map_2'])
                             
-            if golf_ball.selected == True:
-                golf_ball.shoot()
+            
                 
             golf_ball.gravity()
+            
+            
+            if self.sideview:
+                map.draw_side()
+                hitboxes = map.side_hitboxes
+                current_map = map.side_map
+            else:
+                map.draw_top()
+                hitboxes = map.top_hitboxes
+                current_map = map.top_map
             
             # collision
             golf_ball.on_ground = False
             golf_ball.colliding = 0
-            rect = golf_ball.hitbox.collidelist(map.hitboxes)
+            rect = golf_ball.hitbox.collidelist(hitboxes)
             if rect != -1 and golf_ball.has_collided_with != rect:
-                golf_ball.friction(map.materials[map.map['blocks'][rect]['type']]['friction'])
-                x, y, w, h = map.hitboxes[rect]
+                golf_ball.friction(map.materials[current_map['blocks'][rect]['type']]['friction'])
+                x, y, w, h = hitboxes[rect]
                 x1, y1 = x, y
                 x2, y2 = x + w, y
                 x3, y3 = x, y + h
@@ -71,7 +87,10 @@ class Game:
                     if golf_ball.hitbox.clipline(line):
                         golf_ball.collision(line[0][0] == line[1][0])
                         break
-            golf_ball.has_collided_with = rect                    
+            golf_ball.has_collided_with = rect
+            
+            if golf_ball.selected == True:
+                golf_ball.shoot()                 
             
             golf_ball.move()
             

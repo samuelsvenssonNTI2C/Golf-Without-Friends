@@ -1,23 +1,46 @@
 {
     "map_1": {
-        "blocks": [
-            {
-                "position": [1,3],
-                "type": "grass"
-            },
-            {
-                "position": [5,7],
-                "type": "ice"
-            },
-            {
-                "position": [6,7],
-                "type": "ice"
-            },
-            {
-                "position": [7,7],
-                "type": "ice"
-            }
-        ],
-        "goal": "WIP"
+        "side": {
+            "blocks": [
+                {
+                    "position": [1,3],
+                    "type": "grass"
+                },
+                {
+                    "position": [5,7],
+                    "type": "ice"
+                },
+                {
+                    "position": [6,7],
+                    "type": "ice"
+                },
+                {
+                    "position": [7,7],
+                    "type": "ice"
+                }
+            ],
+            "goal": "WIP"
+        },
+        "top": {
+            "blocks": [
+                {
+                    "position": [5,3],
+                    "type": "grass"
+                },
+                {
+                    "position": [5,7],
+                    "type": "ice"
+                },
+                {
+                    "position": [6,7],
+                    "type": "ice"
+                },
+                {
+                    "position": [7,7],
+                    "type": "ice"
+                }
+            ],
+            "goal": "WIP"
+        }
     }
 }
