@@ -8,7 +8,8 @@ from scripts.map import Map
 class Game:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((256, 144))
+        self.screen = pygame.Surface((256, 144))
+        self.display = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     def run(self):
         clock = pygame.time.Clock()
         golf_ball = Ball(self.screen, 100, 100)
@@ -19,7 +20,7 @@ class Game:
         map = Map(self.screen, maps['map_1'])
         
         while True:
-            self.screen.fill((0, 0, 0))
+            self.screen.fill((100, 100, 100))
             map.draw()
             for event in pygame.event.get():
                 match event.type:
@@ -77,9 +78,9 @@ class Game:
             golf_ball.update()
             
             
-            
+            self.display.blit(pygame.transform.scale(self.screen, self.display.get_size()), (0, 0))
             pygame.display.update()
-            
+
             clock.tick(fps)      # sets framerate to 60 fps 
 
 Game().run()
