@@ -66,34 +66,12 @@ class Game:
                 hitboxes = map.top_hitboxes
                 current_map = map.top_map
             
-            # collision
-            golf_ball.on_ground = False
-            golf_ball.colliding = 0
-            rect = golf_ball.hitbox.collidelist(hitboxes)
-            if rect != -1 and golf_ball.has_collided_with != rect:
-                golf_ball.friction(map.materials[current_map['blocks'][rect]['type']]['friction'])
-                x, y, w, h = hitboxes[rect]
-                x1, y1 = x, y
-                x2, y2 = x + w, y
-                x3, y3 = x, y + h
-                x4, y4 = x + w, y + h
- 
-                lines = [
-                    ((x1, y1), (x2, y2)),
-                    ((x1, y1), (x3, y3)),
-                    ((x2, y2), (x4, y4)),
-                    ((x3, y3), (x4, y4))]
-                
-                for line in lines:
-                    if golf_ball.hitbox.clipline(line):
-                        golf_ball.collision(line[0][0] == line[1][0])
-                        break
-            golf_ball.has_collided_with = rect
-            
             if golf_ball.selected == True:
-                golf_ball.shoot()                 
+                golf_ball.shoot()           
             
-            golf_ball.move()
+            collided_with = golf_ball.move(hitboxes)
+            if collided_with != -1:
+                golf_ball.friction(map.materials[current_map['blocks'][collided_with]['type']]['friction'])
             
             golf_ball.update()
             
