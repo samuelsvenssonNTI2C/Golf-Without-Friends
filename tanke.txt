@@ -17,12 +17,7 @@ buggar
     kollision
         överlappning
         kanske lösning
-            kolla kollision x + delta x
-            ändra bollens x med delta x
-            kolla kollision y + delta y
-            ändra bollens y med delta y
-
-            lägg till kollision i Ball
+            få bollen att inte överlappa block
 
 
 

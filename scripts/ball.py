@@ -19,7 +19,7 @@ class Ball():
         self.gravity_acceleration = 0.027    # acceleration in px/frame
         
         self.on_ground = False
-        self.colliding = 0      # -1 -> horizontal, 0 -> no, 1 -> vertical
+        self.collision_rect = -1
         self.collison_velocity_loss = 0.5
         self.resultant = [0, 0]
         
@@ -53,18 +53,21 @@ class Ball():
         for vector in self.vectors:
             self.resultant[0] += self.vectors[vector][0]
             self.resultant[1] += self.vectors[vector][1]
-            
-        collided_with = self.collision(self.resultant, hitboxes)
         
-        if math.hypot(self.resultant[0], self.resultant[1]) < 0.01 or (self.rect != -1 and math.hypot(self.resultant[0], self.resultant[1]) <= 0.3):
+        print(math.hypot(self.resultant[0], self.resultant[1]))
+        if math.hypot(self.resultant[0], self.resultant[1]) < self.gravity_acceleration or (self.collision_rect != -1 and math.hypot(self.resultant[0], self.resultant[1]) <= 0.3):
             self.resultant = [0, 0]
-            
-        self.x += self.resultant[0]
-        self.y += self.resultant[1]
+        else:
+            self.collision('x', hitboxes)
+            self.x += self.resultant[0]
+            self.collision('y', hitboxes)
+            self.y += self.resultant[1]
+            self.abs_x = self.x * self.window_scale
+            self.abs_y = self.y * self.window_scale
         
         self.vectors["velocity"] = [0, 0]
         
-        return collided_with
+        return self.collision_rect
     
     # adds a gravity vector to the ball
     def gravity(self):
@@ -73,40 +76,42 @@ class Ball():
         else:
             self.vectors["gravity"][1] = 0
     
-    # reduces tha balls speed based on object it contacts
+    # reduces the balls speed based on object it contacts
     def friction(self, friction):
         self.resultant[0] *= (1-friction)
         self.resultant[1] *= (1-friction)
     
-    def collision(self, delta, hitboxes):
-        self.on_ground = False
-        test_rect = pygame.Rect([self.hitbox[0] + delta[0], self.hitbox[1] + delta[1], self.hitbox[2], self.hitbox[3]])
-        self.rect = test_rect.collidelist(hitboxes)
-        if self.rect != -1:
-                                # golf_ball.friction(map.materials[current_map['blocks'][rect]['type']]['friction'])
-            x, y, w, h = hitboxes[self.rect]
-            x1, y1 = x, y
-            x2, y2 = x + w, y
-            x3, y3 = x, y + h
-            x4, y4 = x + w, y + h
-
-            lines = [
-                ((x1, y1), (x2, y2)),
-                ((x1, y1), (x3, y3)),
-                ((x2, y2), (x4, y4)),
-                ((x3, y3), (x4, y4))]
-                
-            for line in lines:
-                if test_rect.clipline(line):
-                    if line[0][1] == line[1][1]:  # if line is horizontal (start y = end y)                        self.resultant[1] = -self.resultant[1]
-                        self.on_ground = True
-                        self.resultant[1] = -self.resultant[1] * self.collison_velocity_loss
-                        print('horizontal collision')
-                    elif line[0][0] == line[1][0]:    # if line is vertical (start x = end x)
-                        self.resultant[0] = -self.resultant[0] * self.collison_velocity_loss
-                        print('vertical collision')
-                    break
-        return self.rect
+    def collision(self, direction, hitboxes):
+        self.collision_rect = -1
+        if direction == 'x':
+            test_rect = pygame.Rect([self.hitbox[0] + self.resultant[0], self.hitbox[1], self.hitbox[2], self.hitbox[3]])
+            if test_rect.collidelist(hitboxes) != -1:
+                self.resultant[0] = -self.resultant[0] * self.collison_velocity_loss
+            
+        if direction == 'y':
+            test_rect = pygame.Rect([self.hitbox[0], self.hitbox[1] + self.resultant[1], self.hitbox[2], self.hitbox[3]])
+            self.collision_rect = test_rect.collidelist(hitboxes)
+            if self.collision_rect != -1:
+                self.resultant[1] = -self.resultant[1] * self.collison_velocity_loss
+        
+        # self.on_ground = False
+        # self.rect = -1
+        
+        # # test vertical collision
+        # test_rect = pygame.Rect([self.hitbox[0] + delta[0], self.hitbox[1], self.hitbox[2], self.hitbox[3]])
+        # if test_rect.collidelist(hitboxes) != -1:
+        #     self.resultant[0] = -self.resultant[0] * self.collison_velocity_loss
+        
+        # # test horizontal collision
+        # test_rect = pygame.Rect([self.hitbox[0] + delta[0], self.hitbox[1] + delta[1], self.hitbox[2], self.hitbox[3]])
+        # self.rect = test_rect.collidelist(hitboxes)
+        # if self.rect != -1:
+        #     self.on_ground = True
+        #     self.resultant[1] = -self.resultant[1] * self.collison_velocity_loss
+        
+        # return self.rect
+        
+        
         
     #draw object and save hitbox
     def update(self):
