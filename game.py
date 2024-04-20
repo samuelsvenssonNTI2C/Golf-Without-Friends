@@ -13,7 +13,7 @@ class Game:
         self.scale = self.display.get_width() / self.screen.get_width()
     def run(self):
         clock = pygame.time.Clock()
-        golf_ball = Ball(self.screen, self.scale, 100.5, 100.5)
+        golf_ball = Ball(self.screen, self.scale, 100, 100)
         normal_fps = 60
         fast_fps = 600
         fps = normal_fps
@@ -45,14 +45,15 @@ class Game:
                             sys.exit()
                         if event.key == pygame.K_f:
                             self.sideview = not self.sideview
-                            print("test")
                             
                         if event.key == pygame.K_TAB:
                             print('next map')
                             map = Map(self.screen, maps[1])
                             
             
-                
+            if not self.sideview:
+                golf_ball.on_ground = True
+                golf_ball.friction(0.02)    # friction in topview
             golf_ball.gravity()
             
             

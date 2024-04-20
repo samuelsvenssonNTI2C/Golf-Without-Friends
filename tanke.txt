@@ -1,0 +1,42 @@
+top view
+    position samma ++
+    gravitation stängs av ++
+    (bakgrund ändras till "mark")
+    konstant friktion ++
+        beror på "mark"
+
+
+lägg till mål
+    block med mål textur
+    om nuddar mål
+        (vinst signal)
+        byt bana till nästa
+
+
+buggar
+    kollision
+        överlappning
+        kanske lösning
+            kolla kollision x + delta x
+            ändra bollens x med delta x
+            kolla kollision y + delta y
+            ändra bollens y med delta y
+
+            lägg till kollision i Ball
+
+
+
+bakgrund
+    (rörlig)
+    (object i bakgrund)
+        (rörligt)
+
+
+fler material
+    förslag
+        sand
+            hög friktion
+    textur
+        top
+        side
+    friktion
