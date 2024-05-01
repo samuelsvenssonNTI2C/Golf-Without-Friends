@@ -1,9 +1,11 @@
 top view
-    position samma ++
-    gravitation stängs av ++
+    gravitation stängs av
     (bakgrund ändras till "mark")
-    konstant friktion ++
+    konstant friktion
         beror på "mark"
+    Om byter perspektiv
+        Hamnar "i ett block"
+            Kollision bort tills utanför block
 
 
 lägg till mål
@@ -14,11 +16,7 @@ lägg till mål
 
 
 buggar
-    kollision
-        överlappning
-        kanske lösning
-            få bollen att inte överlappa block
-
+    bollen kan stanna 1 pixel över mark
 
 
 bakgrund

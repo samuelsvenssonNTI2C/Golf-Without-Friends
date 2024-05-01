@@ -10,6 +10,7 @@ class Game:
         pygame.init()
         self.screen = pygame.Surface((256, 144))
         self.display = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        # self.display = pygame.display.set_mode((512, 288))
         self.scale = self.display.get_width() / self.screen.get_width()
     def run(self):
         clock = pygame.time.Clock()
@@ -54,6 +55,8 @@ class Game:
             if not self.sideview:
                 golf_ball.on_ground = True
                 golf_ball.friction(0.02)    # friction in topview
+            else:
+                golf_ball.on_ground = False
             golf_ball.gravity()
             
             

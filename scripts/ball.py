@@ -1,5 +1,6 @@
 import pygame
 import math
+import time
 
 class Ball():
     def __init__(self, screen, window_scale, start_x, start_y):
@@ -10,7 +11,7 @@ class Ball():
         self.abs_y = start_y * self.window_scale
         self.screen = screen
         self.selected = False
-        self.radius = 2.5
+        self.radius = 2
         self.hitbox = pygame.Rect(self.x-self.radius, self.y-self.radius, self.radius*2, self.radius*2)
         self.vectors = {
             "gravity": [0, 0],
@@ -50,11 +51,11 @@ class Ball():
     
     # movement of object
     def move(self, hitboxes):
+        self.on_ground = False
         for vector in self.vectors:
             self.resultant[0] += self.vectors[vector][0]
             self.resultant[1] += self.vectors[vector][1]
         
-        print(math.hypot(self.resultant[0], self.resultant[1]))
         if math.hypot(self.resultant[0], self.resultant[1]) < self.gravity_acceleration or (self.collision_rect != -1 and math.hypot(self.resultant[0], self.resultant[1]) <= 0.3):
             self.resultant = [0, 0]
         else:
@@ -66,7 +67,7 @@ class Ball():
             self.abs_y = self.y * self.window_scale
         
         self.vectors["velocity"] = [0, 0]
-        
+
         return self.collision_rect
     
     # adds a gravity vector to the ball
@@ -83,36 +84,31 @@ class Ball():
     
     def collision(self, direction, hitboxes):
         self.collision_rect = -1
+        
         if direction == 'x':
-            test_rect = pygame.Rect([self.hitbox[0] + self.resultant[0], self.hitbox[1], self.hitbox[2], self.hitbox[3]])
-            if test_rect.collidelist(hitboxes) != -1:
+            test_rect = pygame.Rect([self.hitbox[0] + round_away_from_zero(self.resultant[0]), self.hitbox[1], self.hitbox[2], self.hitbox[3]])
+            self.collision_rect = test_rect.collidelist(hitboxes)
+            if self.collision_rect != -1:                  
                 self.resultant[0] = -self.resultant[0] * self.collison_velocity_loss
-            
+        
         if direction == 'y':
-            test_rect = pygame.Rect([self.hitbox[0], self.hitbox[1] + self.resultant[1], self.hitbox[2], self.hitbox[3]])
+            test_rect = pygame.Rect([self.hitbox[0], self.hitbox[1] + round_away_from_zero(self.resultant[1]), self.hitbox[2], self.hitbox[3]])
             self.collision_rect = test_rect.collidelist(hitboxes)
             if self.collision_rect != -1:
-                self.resultant[1] = -self.resultant[1] * self.collison_velocity_loss
-        
-        # self.on_ground = False
-        # self.rect = -1
-        
-        # # test vertical collision
-        # test_rect = pygame.Rect([self.hitbox[0] + delta[0], self.hitbox[1], self.hitbox[2], self.hitbox[3]])
-        # if test_rect.collidelist(hitboxes) != -1:
-        #     self.resultant[0] = -self.resultant[0] * self.collison_velocity_loss
-        
-        # # test horizontal collision
-        # test_rect = pygame.Rect([self.hitbox[0] + delta[0], self.hitbox[1] + delta[1], self.hitbox[2], self.hitbox[3]])
-        # self.rect = test_rect.collidelist(hitboxes)
-        # if self.rect != -1:
-        #     self.on_ground = True
-        #     self.resultant[1] = -self.resultant[1] * self.collison_velocity_loss
-        
-        # return self.rect
-        
-        
+                if self.resultant[1] > 0:   # ball travels down
+                    self.on_ground = True
+                    
+                self.resultant[1] = -self.resultant[1] * self.collison_velocity_loss        
         
     #draw object and save hitbox
     def update(self):
         self.hitbox = pygame.draw.circle(self.screen, (255, 255, 255), (self.x, self.y), self.radius)
+
+def round_away_from_zero(var):
+    if var < 0:
+        return math.floor(var)
+    elif var > 0:
+        return math.ceil(var)
+    else:
+        return 0
+    
