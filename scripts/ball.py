@@ -23,6 +23,7 @@ class Ball():
         self.collision_rect = -1
         self.collison_velocity_loss = 0.5
         self.resultant = [0, 0]
+        self.in_block = False
         
     # controls the shootong of the ball and adds a velocity vector to the ball
     def shoot(self):
@@ -85,20 +86,24 @@ class Ball():
     def collision(self, direction, hitboxes):
         self.collision_rect = -1
         
-        if direction == 'x':
-            test_rect = pygame.Rect([self.hitbox[0] + round_away_from_zero(self.resultant[0]), self.hitbox[1], self.hitbox[2], self.hitbox[3]])
-            self.collision_rect = test_rect.collidelist(hitboxes)
-            if self.collision_rect != -1:                  
-                self.resultant[0] = -self.resultant[0] * self.collison_velocity_loss
+        if self.hitbox.collidelist(hitboxes) == -1:
+            self.in_block = False
         
-        if direction == 'y':
-            test_rect = pygame.Rect([self.hitbox[0], self.hitbox[1] + round_away_from_zero(self.resultant[1]), self.hitbox[2], self.hitbox[3]])
-            self.collision_rect = test_rect.collidelist(hitboxes)
-            if self.collision_rect != -1:
-                if self.resultant[1] > 0:   # ball travels down
-                    self.on_ground = True
+        if not self.in_block:
+            if direction == 'x':
+                test_rect = pygame.Rect([self.hitbox[0] + round_away_from_zero(self.resultant[0]), self.hitbox[1], self.hitbox[2], self.hitbox[3]])
+                self.collision_rect = test_rect.collidelist(hitboxes)
+                if self.collision_rect != -1:                  
+                    self.resultant[0] = -self.resultant[0] * self.collison_velocity_loss
+            
+            if direction == 'y':
+                test_rect = pygame.Rect([self.hitbox[0], self.hitbox[1] + round_away_from_zero(self.resultant[1]), self.hitbox[2], self.hitbox[3]])
+                self.collision_rect = test_rect.collidelist(hitboxes)
+                if self.collision_rect != -1:
+                    if self.resultant[1] > 0:   # collision when ball travels down
+                        self.on_ground = True
                     
-                self.resultant[1] = -self.resultant[1] * self.collison_velocity_loss        
+                    self.resultant[1] = -self.resultant[1] * self.collison_velocity_loss
         
     #draw object and save hitbox
     def update(self):

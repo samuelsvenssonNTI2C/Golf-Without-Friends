@@ -46,17 +46,19 @@ class Game:
                             sys.exit()
                         if event.key == pygame.K_f:
                             self.sideview = not self.sideview
+                            golf_ball.in_block = True
                             
                         if event.key == pygame.K_TAB:
                             print('next map')
                             map = Map(self.screen, maps[1])
                             
             
-            if not self.sideview:
+            if not self.sideview or golf_ball.in_block:
                 golf_ball.on_ground = True
                 golf_ball.friction(0.02)    # friction in topview
             else:
                 golf_ball.on_ground = False
+                
             golf_ball.gravity()
             
             
@@ -73,7 +75,7 @@ class Game:
                 golf_ball.shoot()           
             
             collided_with = golf_ball.move(hitboxes)
-            if collided_with != -1:
+            if collided_with != -1 and collided_with < len(current_map['blocks']):
                 golf_ball.friction(map.materials[current_map['blocks'][collided_with]['type']]['friction'])
             
             golf_ball.update()

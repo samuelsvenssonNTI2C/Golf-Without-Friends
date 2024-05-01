@@ -1,11 +1,16 @@
 top view
-    gravitation stängs av
+    gravitation stängs av ++
     (bakgrund ändras till "mark")
-    konstant friktion
+    konstant friktion ++
         beror på "mark"
-    Om byter perspektiv
-        Hamnar "i ett block"
-            Kollision bort tills utanför block
+    Om byter perspektiv ++
+        Hamnar "i ett block" ++
+            Kollision och gravitation bort tills utanför block ++
+
+
+övrigt
+    studs på kant
+    möjlighet att skjuta borta från bollen
 
 
 lägg till mål
@@ -26,10 +31,9 @@ bakgrund
 
 
 fler material
-    förslag
-        sand
-            hög friktion
-    textur
-        top
-        side
-    friktion
+    dirt
+        block under grass
+    sand
+        hög friktion
+    cobblestone
+        vägg i top perspektiv

@@ -4,27 +4,6 @@
             "blocks": [
                 {
                     "position": [
-                        5,
-                        7
-                    ],
-                    "type": "ice"
-                },
-                {
-                    "position": [
-                        6,
-                        7
-                    ],
-                    "type": "ice"
-                },
-                {
-                    "position": [
-                        7,
-                        7
-                    ],
-                    "type": "ice"
-                },
-                {
-                    "position": [
                         0.0,
                         7.0
                     ],
@@ -32,77 +11,7 @@
                 },
                 {
                     "position": [
-                        1.0,
-                        7.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        2.0,
-                        7.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        3.0,
-                        7.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
                         4.0,
-                        7.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        8.0,
-                        7.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        9.0,
-                        7.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        10.0,
-                        7.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        12.0,
-                        7.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        11.0,
-                        7.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        13.0,
-                        7.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        14.0,
                         7.0
                     ],
                     "type": "grass"
@@ -132,34 +41,6 @@
                     "position": [
                         4.0,
                         4.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        4.0,
-                        3.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        3.0,
-                        3.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        2.0,
-                        3.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        1.0,
-                        3.0
                     ],
                     "type": "grass"
                 },
@@ -361,8 +242,113 @@
                 },
                 {
                     "position": [
+                        0.0,
+                        8.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        1.0,
+                        8.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        2.0,
+                        8.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        4.0,
+                        8.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        3.0,
+                        8.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        5.0,
+                        8.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        6.0,
+                        8.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
                         7.0,
-                        5.0
+                        8.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        8.0,
+                        8.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        9.0,
+                        8.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        10.0,
+                        8.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        11.0,
+                        8.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        12.0,
+                        8.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        13.0,
+                        8.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        14.0,
+                        8.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        15.0,
+                        8.0
                     ],
                     "type": "grass"
                 },
@@ -370,6 +356,132 @@
                     "position": [
                         7.0,
                         6.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        7.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        14.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        13.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        12.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        11.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        10.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        9.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        8.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        7.0,
+                        5.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        6.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        5.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        3.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        2.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        1.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        1.0,
+                        3.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        2.0,
+                        3.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        3.0,
+                        3.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        4.0,
+                        3.0
                     ],
                     "type": "grass"
                 }
