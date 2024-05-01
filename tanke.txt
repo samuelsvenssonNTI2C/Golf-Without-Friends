@@ -9,7 +9,6 @@ top view
 
 
 övrigt
-    studs på kant
     möjlighet att skjuta borta från bollen
 
 

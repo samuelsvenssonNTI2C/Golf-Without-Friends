@@ -66,6 +66,7 @@ class Ball():
             self.y += self.resultant[1]
             self.abs_x = self.x * self.window_scale
             self.abs_y = self.y * self.window_scale
+            
         
         self.vectors["velocity"] = [0, 0]
 

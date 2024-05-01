@@ -21,26 +21,8 @@ class Editor:
         selected_block = 0
         blocks = [img_load('textures/grass.png')]
         block_type = ['grass']
-        map_template = {
-            'side': {
-                'blocks': [
-                    {
-                        'position': [1,3],
-                        'type': 'grass'
-                        }
-                    ],
-                'goal': 'WIP'
-                },
-            'top': {
-                'blocks': [
-                    {
-                        'position': [5,3],
-                        'type': 'grass'
-                        },
-                    ],
-                'goal': 'WIP'
-                }
-            }
+        map_template = {"side":{"blocks":[{"position":[0.0,-1.0],"type":"grass"},{"position":[1.0,-1.0],"type":"grass"},{"position":[2.0,-1.0],"type":"grass"},{"position":[3.0,-1.0],"type":"grass"},{"position":[4.0,-1.0],"type":"grass"},{"position":[5.0,-1.0],"type":"grass"},{"position":[6.0,-1.0],"type":"grass"},{"position":[7.0,-1.0],"type":"grass"},{"position":[8.0,-1.0],"type":"grass"},{"position":[9.0,-1.0],"type":"grass"},{"position":[10.0,-1.0],"type":"grass"},{"position":[11.0,-1.0],"type":"grass"},{"position":[12.0,-1.0],"type":"grass"},{"position":[13.0,-1.0],"type":"grass"},{"position":[14.0,-1.0],"type":"grass"},{"position":[15.0,-1.0],"type":"grass"},{"position":[16.0,0.0],"type":"grass"},{"position":[16.0,1.0],"type":"grass"},{"position":[16.0,2.0],"type":"grass"},{"position":[16.0,3.0],"type":"grass"},{"position":[16.0,4.0],"type":"grass"},{"position":[16.0,5.0],"type":"grass"},{"position":[16.0,6.0],"type":"grass"},{"position":[16.0,7.0],"type":"grass"},{"position":[16.0,8.0],"type":"grass"},{"position":[15.0,9.0],"type":"grass"},{"position":[14.0,9.0],"type":"grass"},{"position":[13.0,9.0],"type":"grass"},{"position":[12.0,9.0],"type":"grass"},{"position":[11.0,9.0],"type":"grass"},{"position":[10.0,9.0],"type":"grass"},{"position":[9.0,9.0],"type":"grass"},{"position":[8.0,9.0],"type":"grass"},{"position":[7.0,9.0],"type":"grass"},{"position":[6.0,9.0],"type":"grass"},{"position":[5.0,9.0],"type":"grass"},{"position":[4.0,9.0],"type":"grass"},{"position":[3.0,9.0],"type":"grass"},{"position":[2.0,9.0],"type":"grass"},{"position":[1.0,9.0],"type":"grass"},{"position":[0.0,9.0],"type":"grass"},{"position":[-1.0,8.0],"type":"grass"},{"position":[-1.0,7.0],"type":"grass"},{"position":[-1.0,6.0],"type":"grass"},{"position":[-1.0,5.0],"type":"grass"},{"position":[-1.0,4.0],"type":"grass"},{"position":[-1.0,3.0],"type":"grass"},{"position":[-1.0,2.0],"type":"grass"},{"position":[-1.0,1.0],"type":"grass"},{"position":[-1.0,0.0],"type":"grass"}],"goal":"WIP"},"top":{"blocks":[{"position":[5,3],"type":"grass"}],"goal":"WIP"}}
+
         if self.option == 'e':
             map = Map(self.screen, maps[self.level])
         else:

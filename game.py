@@ -19,7 +19,7 @@ class Game:
         fast_fps = 600
         fps = normal_fps
         maps = json.load(open('maps.json'))
-        map = Map(self.screen, maps[0])
+        map = Map(self.screen, maps[2])
         self.sideview = True
         
         while True:
