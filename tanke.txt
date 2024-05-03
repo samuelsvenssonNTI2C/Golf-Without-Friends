@@ -1,6 +1,6 @@
 top view
     gravitation stängs av ++
-    (bakgrund ändras till "mark")
+    bakgrund ändras till "mark"
     konstant friktion ++
         beror på "mark"
     Om byter perspektiv ++
@@ -9,7 +9,7 @@ top view
 
 
 övrigt
-    möjlighet att skjuta borta från bollen
+    
 
 
 lägg till mål

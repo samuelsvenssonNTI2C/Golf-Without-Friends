@@ -25,276 +25,276 @@
                 },
                 {
                     "position": [
-                        4.0,
-                        6.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        4.0,
-                        5.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        4.0,
-                        4.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        0.0,
-                        3.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        0.0,
-                        8.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        1.0,
-                        8.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        2.0,
-                        8.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        4.0,
-                        8.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        3.0,
-                        8.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        5.0,
-                        8.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        6.0,
-                        8.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
                         7.0,
-                        8.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        8.0,
-                        8.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        9.0,
-                        8.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        10.0,
-                        8.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        11.0,
-                        8.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        12.0,
-                        8.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        13.0,
-                        8.0
+                        7.0
                     ],
                     "type": "grass"
                 },
                 {
                     "position": [
                         14.0,
-                        8.0
+                        7.0
                     ],
                     "type": "grass"
+                },
+                {
+                    "position": [
+                        13.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        12.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        11.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        10.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        9.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        8.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        6.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        5.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        3.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        2.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        1.0,
+                        7.0
+                    ],
+                    "type": "grass"
+                },
+                {
+                    "position": [
+                        7.0,
+                        5.0
+                    ],
+                    "type": "ice"
+                },
+                {
+                    "position": [
+                        7.0,
+                        6.0
+                    ],
+                    "type": "ice"
                 },
                 {
                     "position": [
                         15.0,
                         8.0
                     ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        7.0,
-                        6.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        7.0,
-                        7.0
-                    ],
-                    "type": "grass"
+                    "type": "dirt"
                 },
                 {
                     "position": [
                         14.0,
-                        7.0
+                        8.0
                     ],
-                    "type": "grass"
+                    "type": "dirt"
                 },
                 {
                     "position": [
                         13.0,
-                        7.0
+                        8.0
                     ],
-                    "type": "grass"
+                    "type": "dirt"
                 },
                 {
                     "position": [
                         12.0,
-                        7.0
+                        8.0
                     ],
-                    "type": "grass"
+                    "type": "dirt"
                 },
                 {
                     "position": [
                         11.0,
-                        7.0
+                        8.0
                     ],
-                    "type": "grass"
+                    "type": "dirt"
                 },
                 {
                     "position": [
                         10.0,
-                        7.0
+                        8.0
                     ],
-                    "type": "grass"
+                    "type": "dirt"
                 },
                 {
                     "position": [
                         9.0,
-                        7.0
+                        8.0
                     ],
-                    "type": "grass"
+                    "type": "dirt"
                 },
                 {
                     "position": [
                         8.0,
-                        7.0
+                        8.0
                     ],
-                    "type": "grass"
+                    "type": "dirt"
                 },
                 {
                     "position": [
                         7.0,
-                        5.0
+                        8.0
                     ],
-                    "type": "grass"
+                    "type": "dirt"
                 },
                 {
                     "position": [
                         6.0,
-                        7.0
+                        8.0
                     ],
-                    "type": "grass"
+                    "type": "dirt"
                 },
                 {
                     "position": [
                         5.0,
-                        7.0
+                        8.0
                     ],
-                    "type": "grass"
+                    "type": "dirt"
+                },
+                {
+                    "position": [
+                        4.0,
+                        8.0
+                    ],
+                    "type": "dirt"
                 },
                 {
                     "position": [
                         3.0,
-                        7.0
+                        8.0
                     ],
-                    "type": "grass"
+                    "type": "dirt"
                 },
                 {
                     "position": [
                         2.0,
-                        7.0
+                        8.0
                     ],
-                    "type": "grass"
+                    "type": "dirt"
                 },
                 {
                     "position": [
                         1.0,
-                        7.0
+                        8.0
                     ],
-                    "type": "grass"
+                    "type": "dirt"
                 },
                 {
                     "position": [
-                        1.0,
-                        3.0
+                        0.0,
+                        8.0
                     ],
-                    "type": "grass"
+                    "type": "dirt"
                 },
                 {
                     "position": [
-                        2.0,
-                        3.0
+                        4.0,
+                        6.0
                     ],
-                    "type": "grass"
+                    "type": "cobblestone"
                 },
                 {
                     "position": [
-                        3.0,
-                        3.0
+                        4.0,
+                        5.0
                     ],
-                    "type": "grass"
+                    "type": "cobblestone"
+                },
+                {
+                    "position": [
+                        4.0,
+                        4.0
+                    ],
+                    "type": "cobblestone"
                 },
                 {
                     "position": [
                         4.0,
                         3.0
                     ],
-                    "type": "grass"
+                    "type": "cobblestone"
+                },
+                {
+                    "position": [
+                        3.0,
+                        3.0
+                    ],
+                    "type": "cobblestone"
+                },
+                {
+                    "position": [
+                        2.0,
+                        3.0
+                    ],
+                    "type": "cobblestone"
+                },
+                {
+                    "position": [
+                        1.0,
+                        3.0
+                    ],
+                    "type": "cobblestone"
+                },
+                {
+                    "position": [
+                        0.0,
+                        3.0
+                    ],
+                    "type": "cobblestone"
                 }
             ],
             "goal": "WIP"
@@ -303,101 +303,87 @@
             "blocks": [
                 {
                     "position": [
-                        0.0,
+                        4.0,
                         7.0
                     ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        1.0,
-                        7.0
-                    ],
-                    "type": "grass"
+                    "type": "cobblestone"
                 },
                 {
                     "position": [
                         2.0,
                         7.0
                     ],
-                    "type": "grass"
+                    "type": "cobblestone"
                 },
                 {
                     "position": [
                         3.0,
                         7.0
                     ],
-                    "type": "grass"
+                    "type": "cobblestone"
                 },
                 {
                     "position": [
-                        4.0,
+                        1.0,
                         7.0
                     ],
-                    "type": "grass"
+                    "type": "cobblestone"
                 },
                 {
                     "position": [
-                        7.0,
-                        0.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        7.0,
-                        1.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        7.0,
-                        2.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        7.0,
-                        3.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        7.0,
-                        4.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        7.0,
-                        5.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        7.0,
-                        6.0
-                    ],
-                    "type": "grass"
-                },
-                {
-                    "position": [
-                        7.0,
+                        0.0,
                         7.0
                     ],
-                    "type": "grass"
+                    "type": "cobblestone"
                 },
                 {
                     "position": [
                         7.0,
                         8.0
                     ],
-                    "type": "grass"
+                    "type": "ice"
+                },
+                {
+                    "position": [
+                        7.0,
+                        7.0
+                    ],
+                    "type": "ice"
+                },
+                {
+                    "position": [
+                        7.0,
+                        6.0
+                    ],
+                    "type": "ice"
+                },
+                {
+                    "position": [
+                        7.0,
+                        3.0
+                    ],
+                    "type": "ice"
+                },
+                {
+                    "position": [
+                        7.0,
+                        2.0
+                    ],
+                    "type": "ice"
+                },
+                {
+                    "position": [
+                        7.0,
+                        1.0
+                    ],
+                    "type": "ice"
+                },
+                {
+                    "position": [
+                        7.0,
+                        0.0
+                    ],
+                    "type": "ice"
                 }
             ],
             "goal": "WIP"

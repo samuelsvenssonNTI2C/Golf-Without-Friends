@@ -11,6 +11,7 @@ class Ball():
         self.abs_y = start_y * self.window_scale
         self.screen = screen
         self.selected = False
+        self.has_been_selected = False
         self.radius = 2
         self.hitbox = pygame.Rect(self.x-self.radius, self.y-self.radius, self.radius*2, self.radius*2)
         self.vectors = {
@@ -27,30 +28,35 @@ class Ball():
         
     # controls the shootong of the ball and adds a velocity vector to the ball
     def shoot(self):
-        velocity_factor = 0.01
-        max_strength = 2.6       # max velocity
+        velocity_factor = 0.010
+        max_strength = 2       # max velocity
         x, y = pygame.mouse.get_pos()
+        if not self.has_been_selected:
+            self.start_x, self.start_y = pygame.mouse.get_pos()
+        self.has_been_selected = True
         # x, y offset from object
-        rel_x = (x - self.abs_x)*velocity_factor
-        rel_y = (y - self.abs_y)*velocity_factor
+        rel_x = (x - self.start_x)*velocity_factor
+        rel_y = (y - self.start_y)*velocity_factor
         strength = math.hypot(rel_x, rel_y)
-        if  strength > max_strength:
+        if strength > max_strength:
             rel_x *= max_strength/strength
             rel_y *= max_strength/strength
             strength = max_strength
         
         # shoot power line
         if strength < max_strength/2:        # line color changes based on velocity: g -> low, b -> mid, r -> high
-            pygame.draw.line(self.screen, (0, 255 - 255*(strength/(max_strength/2)), 255*(strength/(max_strength/2))), (self.x-1, self.y-1), (x/self.window_scale, y/self.window_scale), 2)
+            pygame.draw.line(self.screen, (0, 255 - 255*(strength/(max_strength/2)), 255*(strength/(max_strength/2))), (self.start_x/self.window_scale - 1, self.start_y/self.window_scale - 1), (x/self.window_scale, y/self.window_scale), 2)
         else:
-            pygame.draw.line(self.screen, (255*(((strength-max_strength/2)*2)/max_strength), 0, 255 - 255*(((strength-max_strength/2)*2)/max_strength)), (self.x-1, self.y-1), (x/self.window_scale, y/self.window_scale), 2)
+            pygame.draw.line(self.screen, (255*(((strength-max_strength/2)*2)/max_strength), 0, 255 - 255*(((strength-max_strength/2)*2)/max_strength)), (self.start_x/self.window_scale - 1, self.start_y/self.window_scale - 1), (x/self.window_scale, y/self.window_scale), 2)
+        pygame.draw.circle(self.screen, (255, 255, 255), (self.start_x/self.window_scale, self.start_y/self.window_scale), self.radius*0.5)
         
         # release shoot
         if pygame.mouse.get_pressed(3)[0] == False:
             self.selected = False
+            self.has_been_selected = False
             self.vectors["velocity"] = [-rel_x, -rel_y]
     
-    # movement of object
+    # movement of the ball
     def move(self, hitboxes):
         self.on_ground = False
         for vector in self.vectors:

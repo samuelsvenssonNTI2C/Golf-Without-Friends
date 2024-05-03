@@ -17,10 +17,9 @@ class Editor:
     def run(self):
         maps = json.load(open('maps.json'))
         sideview = True
-        img_load = pygame.image.load
         selected_block = 0
-        blocks = [img_load('textures/grass.png')]
-        block_type = ['grass']
+        block_textures = Map.materials
+        block_type = ['grass', 'ice', 'sand', 'dirt', 'cobblestone']
         map_template = {"side":{"blocks":[{"position":[0.0,-1.0],"type":"grass"},{"position":[1.0,-1.0],"type":"grass"},{"position":[2.0,-1.0],"type":"grass"},{"position":[3.0,-1.0],"type":"grass"},{"position":[4.0,-1.0],"type":"grass"},{"position":[5.0,-1.0],"type":"grass"},{"position":[6.0,-1.0],"type":"grass"},{"position":[7.0,-1.0],"type":"grass"},{"position":[8.0,-1.0],"type":"grass"},{"position":[9.0,-1.0],"type":"grass"},{"position":[10.0,-1.0],"type":"grass"},{"position":[11.0,-1.0],"type":"grass"},{"position":[12.0,-1.0],"type":"grass"},{"position":[13.0,-1.0],"type":"grass"},{"position":[14.0,-1.0],"type":"grass"},{"position":[15.0,-1.0],"type":"grass"},{"position":[16.0,0.0],"type":"grass"},{"position":[16.0,1.0],"type":"grass"},{"position":[16.0,2.0],"type":"grass"},{"position":[16.0,3.0],"type":"grass"},{"position":[16.0,4.0],"type":"grass"},{"position":[16.0,5.0],"type":"grass"},{"position":[16.0,6.0],"type":"grass"},{"position":[16.0,7.0],"type":"grass"},{"position":[16.0,8.0],"type":"grass"},{"position":[15.0,9.0],"type":"grass"},{"position":[14.0,9.0],"type":"grass"},{"position":[13.0,9.0],"type":"grass"},{"position":[12.0,9.0],"type":"grass"},{"position":[11.0,9.0],"type":"grass"},{"position":[10.0,9.0],"type":"grass"},{"position":[9.0,9.0],"type":"grass"},{"position":[8.0,9.0],"type":"grass"},{"position":[7.0,9.0],"type":"grass"},{"position":[6.0,9.0],"type":"grass"},{"position":[5.0,9.0],"type":"grass"},{"position":[4.0,9.0],"type":"grass"},{"position":[3.0,9.0],"type":"grass"},{"position":[2.0,9.0],"type":"grass"},{"position":[1.0,9.0],"type":"grass"},{"position":[0.0,9.0],"type":"grass"},{"position":[-1.0,8.0],"type":"grass"},{"position":[-1.0,7.0],"type":"grass"},{"position":[-1.0,6.0],"type":"grass"},{"position":[-1.0,5.0],"type":"grass"},{"position":[-1.0,4.0],"type":"grass"},{"position":[-1.0,3.0],"type":"grass"},{"position":[-1.0,2.0],"type":"grass"},{"position":[-1.0,1.0],"type":"grass"},{"position":[-1.0,0.0],"type":"grass"}],"goal":"WIP"},"top":{"blocks":[{"position":[5,3],"type":"grass"}],"goal":"WIP"}}
 
         if self.option == 'e':
@@ -55,7 +54,7 @@ class Editor:
                                 file.close()
                                     
                     case pygame.MOUSEWHEEL:
-                        if selected_block + event.y < len(blocks)-1 and selected_block + event.y > 0:
+                        if selected_block + event.y < len(block_type) and selected_block + event.y >= 0:
                             selected_block += event.y
                         
                     case pygame.MOUSEBUTTONUP:
@@ -72,7 +71,7 @@ class Editor:
                                 if not removed:
                                     map.side_map['blocks'].append({'position': [x/16,y/16], 'type': block_type[selected_block]})
                                     map.side_hitboxes.append(pygame.Rect(x, y, 16, 16))
-                                    map.side_textures.append(blocks[selected_block])
+                                    map.side_textures.append(block_textures[block_type[selected_block]]['side_texture'])
                             else:
                                 removed = False
                                 for object in map.top_map['blocks']:
@@ -85,7 +84,7 @@ class Editor:
                                 if not removed:
                                     map.top_map['blocks'].append({'position': [x/16,y/16], 'type': block_type[selected_block]})
                                     map.top_hitboxes.append(pygame.Rect(x, y, 16, 16))
-                                    map.top_textures.append(blocks[selected_block])
+                                    map.top_textures.append(block_textures[block_type[selected_block]]['top_texture'])
                                 
             self.screen.fill((100, 100, 100))
             
@@ -95,8 +94,10 @@ class Editor:
             x = base * round((x - base/2)/base) / self.scale
             y = base * round((y - base/2)/base) / self.scale
             
-            self.screen.blit(blocks[selected_block], (x, y))
-            
+            if sideview:
+                self.screen.blit(block_textures[block_type[selected_block]]['side_texture'], (x, y))
+            else:
+                self.screen.blit(block_textures[block_type[selected_block]]['top_texture'], (x, y))
             
             if sideview:
                 map.draw_side()

@@ -19,7 +19,7 @@ class Game:
         fast_fps = 600
         fps = normal_fps
         maps = json.load(open('maps.json'))
-        map = Map(self.screen, maps[2])
+        map = Map(self.screen, maps[0])
         self.sideview = True
         
         while True:
@@ -31,7 +31,7 @@ class Game:
                         sys.exit()
                     
                     case pygame.MOUSEBUTTONDOWN:
-                        if golf_ball.resultant == [0, 0] and golf_ball.hitbox.collidepoint(pygame.mouse.get_pos()[0]/self.scale, pygame.mouse.get_pos()[1]/self.scale):
+                        if golf_ball.resultant == [0, 0]:
                             golf_ball.selected = True
                             
                     case pygame.KEYDOWN:
