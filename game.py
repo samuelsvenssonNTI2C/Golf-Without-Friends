@@ -19,11 +19,14 @@ class Game:
         fast_fps = 600
         fps = normal_fps
         maps = json.load(open('maps.json'))
-        map = Map(self.screen, maps[0])
-        self.sideview = True
+        current_map_index = 0
+        map = Map(self.screen, maps[current_map_index])
+        current_map = map.side_map
+        sideview = True
         
         while True:
-            self.screen.fill((100, 100, 100))
+            self.screen.blit(Map.background[current_map['background']]['texture'], (0, 0))
+            
             for event in pygame.event.get():
                 match event.type:
                     case pygame.QUIT:
@@ -45,24 +48,26 @@ class Game:
                             pygame.quit()
                             sys.exit()
                         if event.key == pygame.K_f:
-                            self.sideview = not self.sideview
+                            sideview = not sideview
                             golf_ball.in_block = True
                             
                         if event.key == pygame.K_TAB:
-                            print('next map')
-                            map = Map(self.screen, maps[1])
-                            
+                            if current_map_index < len(maps)-1:
+                                current_map_index += 1
+                                map = Map(self.screen, maps[current_map_index])
+                            else:
+                                raise 'you won'
+                                         
             
-            if not self.sideview or golf_ball.in_block:
+            if not sideview or golf_ball.in_block:
                 golf_ball.on_ground = True
-                golf_ball.friction(0.02)    # friction in topview
             else:
                 golf_ball.on_ground = False
                 
             golf_ball.gravity()
             
             
-            if self.sideview:
+            if sideview:
                 map.draw_side()
                 hitboxes = map.side_hitboxes
                 current_map = map.side_map
@@ -71,15 +76,25 @@ class Game:
                 hitboxes = map.top_hitboxes
                 current_map = map.top_map
             
+            
             if golf_ball.selected == True:
                 golf_ball.shoot()           
             
+            golf_ball.friction(Map.background[current_map['background']]['friction'])  # constant friction from background
             collided_with = golf_ball.move(hitboxes)
             if collided_with != -1 and collided_with < len(current_map['blocks']):
                 golf_ball.friction(map.materials[current_map['blocks'][collided_with]['type']]['friction'])
+                if current_map['blocks'][collided_with]['type'] == 'victory_block':
+                    print(math.hypot(golf_ball.resultant[0], golf_ball.resultant[1]))
+                if current_map['blocks'][collided_with]['type'] == 'victory_block' and math.hypot(golf_ball.resultant[0], golf_ball.resultant[1]) < 0.2:
+                    if current_map_index < len(maps)-1:
+                        current_map_index += 1
+                        map = Map(self.screen, maps[current_map_index])
+                    else:
+                        raise 'you won'
+            
             
             golf_ball.update()
-            
             
             self.display.blit(pygame.transform.scale(self.screen, self.display.get_size()), (0, 0))
             pygame.display.update()

@@ -59,6 +59,8 @@ class Ball():
     # movement of the ball
     def move(self, hitboxes):
         self.on_ground = False
+        collided_with = -1
+        
         for vector in self.vectors:
             self.resultant[0] += self.vectors[vector][0]
             self.resultant[1] += self.vectors[vector][1]
@@ -67,8 +69,12 @@ class Ball():
             self.resultant = [0, 0]
         else:
             self.collision('x', hitboxes)
+            if self.collision_rect != -1:
+                collided_with = self.collision_rect
             self.x += self.resultant[0]
             self.collision('y', hitboxes)
+            if self.collision_rect != -1:
+                collided_with = self.collision_rect
             self.y += self.resultant[1]
             self.abs_x = self.x * self.window_scale
             self.abs_y = self.y * self.window_scale
@@ -76,7 +82,7 @@ class Ball():
         
         self.vectors["velocity"] = [0, 0]
 
-        return self.collision_rect
+        return collided_with
     
     # adds a gravity vector to the ball
     def gravity(self):

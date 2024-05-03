@@ -1,26 +1,17 @@
-top view
-    gravitation stängs av ++
-    bakgrund ändras till "mark"
-    konstant friktion ++
-        beror på "mark"
-    Om byter perspektiv ++
-        Hamnar "i ett block" ++
-            Kollision och gravitation bort tills utanför block ++
-
-
 övrigt
-    
+    lägg till bollens start position i map_template och game ser det
 
 
 lägg till mål
-    block med mål textur
-    om nuddar mål
+    block med mål textur ++
+    om nuddar mål ++
         (vinst signal)
-        byt bana till nästa
+        byt till nästa bana ++
 
 
 buggar
     bollen kan stanna 1 pixel över mark
+    när man byter från top till side när bollen står still aktiveras inte gravitation
 
 
 bakgrund
@@ -30,9 +21,3 @@ bakgrund
 
 
 fler material
-    dirt
-        block under grass
-    sand
-        hög friktion
-    cobblestone
-        vägg i top perspektiv

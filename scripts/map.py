@@ -26,7 +26,26 @@ class Map:
             'friction': 0.2,
             'side_texture': pygame.image.load('textures/dirt.png'),
             'top_texture': pygame.image.load('textures/dirt.png')
+        },
+        'victory_block': {
+            'friction': 0.15,
+            'side_texture': pygame.image.load('textures/victory_block.png'),
+            'top_texture': pygame.image.load('textures/victory_block.png')
         }
+    }
+    background = {
+        'grass': {
+            'friction': 0.02,
+            'texture': pygame.image.load('backgrounds/grass.png')
+            },
+        'sky': {
+            'friction': 0,
+            'texture': pygame.image.load('backgrounds/sky.png')
+            },
+        'ice': {
+            'friction': 0.002,
+            'texture': pygame.image.load('backgrounds/ice.png')
+            }
     }
     
     def __init__(self, screen, dict):
