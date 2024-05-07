@@ -1,4 +1,5 @@
 övrigt
+    antal slag räknare
 
 
 buggar
@@ -6,12 +7,12 @@ buggar
     när man byter från top till side när bollen står still aktiveras inte gravitation
 
 
-bakgrund
-    (rörlig)
-    (object i bakgrund)
-        (rörligt)
-
-
-fler material
-
 fler banor
+
+
+meny
+    välja bana
+    knappar
+        banor
+        avsluta
+        sparfiler
