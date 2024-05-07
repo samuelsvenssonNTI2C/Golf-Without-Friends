@@ -4,6 +4,7 @@ import json
 import math
 from scripts.ball import Ball
 from scripts.map import Map
+from scripts.animation import Animation
 
 class Game:
     def __init__(self):
@@ -14,7 +15,7 @@ class Game:
         self.scale = self.display.get_width() / self.screen.get_width()
     def run(self):
         clock = pygame.time.Clock()
-        golf_ball = Ball(self.screen, self.scale, 100, 100)
+        
         normal_fps = 60
         fast_fps = 600
         fps = normal_fps
@@ -22,11 +23,17 @@ class Game:
         current_map_index = 0
         map = Map(self.screen, maps[current_map_index])
         current_map = map.side_map
+        golf_ball = Ball(self.screen, self.scale, map.side_map['starting_point'])
+        goal_animation = Animation(self.display, 'animations/goal_confetti', 0.4, (0, 0))
+        goal_animation.offsets = (-goal_animation.images[0].get_width()/2, -goal_animation.images[0].get_height())
+        # goal_animation.offsets = (1, 1)
         sideview = True
+        win = False
+        
+        frame = 0
         
         while True:
             self.screen.blit(Map.background[current_map['background']]['texture'], (0, 0))
-            
             for event in pygame.event.get():
                 match event.type:
                     case pygame.QUIT:
@@ -84,19 +91,27 @@ class Game:
             collided_with = golf_ball.move(hitboxes)
             if collided_with != -1 and collided_with < len(current_map['blocks']):
                 golf_ball.friction(map.materials[current_map['blocks'][collided_with]['type']]['friction'])
-                if current_map['blocks'][collided_with]['type'] == 'victory_block':
-                    print(math.hypot(golf_ball.resultant[0], golf_ball.resultant[1]))
-                if current_map['blocks'][collided_with]['type'] == 'victory_block' and math.hypot(golf_ball.resultant[0], golf_ball.resultant[1]) < 0.2:
-                    if current_map_index < len(maps)-1:
-                        current_map_index += 1
-                        map = Map(self.screen, maps[current_map_index])
-                    else:
-                        raise 'you won'
+                if current_map['blocks'][collided_with]['type'] == 'victory_block' and math.hypot(golf_ball.resultant[0], golf_ball.resultant[1]) < 0.3:
+                    win = True
             
             
             golf_ball.update()
             
             self.display.blit(pygame.transform.scale(self.screen, self.display.get_size()), (0, 0))
+            
+            if win:
+                goal_animation.draw((500, 500), frame)
+                if frame < goal_animation.number_of_frames-1:
+                    frame += 1
+                else:
+                    win = False
+                    if current_map_index < len(maps)-1:
+                        goal_animation.draw((cord * 16) for cord in current_map['blocks'][collided_with]['position'])
+                        current_map_index += 1
+                        map = Map(self.screen, maps[current_map_index])
+                    else:
+                        raise 'you won'
+                
             pygame.display.update()
 
             clock.tick(fps)      # sets framerate to 60 fps 

@@ -3,12 +3,10 @@ import math
 import time
 
 class Ball():
-    def __init__(self, screen, window_scale, start_x, start_y):
-        self.x = start_x
-        self.y = start_y
+    def __init__(self, screen, window_scale, start_cordinates):
+        self.x, self.y = start_cordinates
         self.window_scale = window_scale
-        self.abs_x = start_x * self.window_scale
-        self.abs_y = start_y * self.window_scale
+        self.abs_x, self.abs_y = [cord * window_scale for cord in start_cordinates]        
         self.screen = screen
         self.selected = False
         self.has_been_selected = False

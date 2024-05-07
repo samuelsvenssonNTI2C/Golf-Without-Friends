@@ -1,12 +1,4 @@
 övrigt
-    lägg till bollens start position i map_template och game ser det
-
-
-lägg till mål
-    block med mål textur ++
-    om nuddar mål ++
-        (vinst signal)
-        byt till nästa bana ++
 
 
 buggar
@@ -21,3 +13,5 @@ bakgrund
 
 
 fler material
+
+fler banor
