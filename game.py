@@ -5,6 +5,7 @@ import math
 from scripts.ball import Ball
 from scripts.map import Map
 from scripts.animation import Animation
+import time
 
 class Game:
     def __init__(self):
@@ -24,8 +25,7 @@ class Game:
         map = Map(self.screen, maps[current_map_index])
         current_map = map.side_map
         golf_ball = Ball(self.screen, self.scale, map.side_map['starting_point'])
-        goal_animation = Animation(self.display, 'animations/goal_confetti', 0.4, (0, 0))
-        goal_animation.offsets = (-goal_animation.images[0].get_width()/2, -goal_animation.images[0].get_height())
+        goal_animation = Animation(self.display, 'animations/goal_confetti', 0.4, (-64, -100))
         # goal_animation.offsets = (1, 1)
         sideview = True
         win = False
@@ -93,24 +93,23 @@ class Game:
                 golf_ball.friction(map.materials[current_map['blocks'][collided_with]['type']]['friction'])
                 if current_map['blocks'][collided_with]['type'] == 'victory_block' and math.hypot(golf_ball.resultant[0], golf_ball.resultant[1]) < 0.3:
                     win = True
-            
-            
+                    winblock_index = collided_with
+
             golf_ball.update()
             
             self.display.blit(pygame.transform.scale(self.screen, self.display.get_size()), (0, 0))
             
             if win:
-                goal_animation.draw((500, 500), frame)
+                goal_animation.draw(([cord * 16 * self.scale for cord in current_map['blocks'][winblock_index]['position']]), frame)
                 if frame < goal_animation.number_of_frames-1:
                     frame += 1
                 else:
                     win = False
                     if current_map_index < len(maps)-1:
-                        goal_animation.draw((cord * 16) for cord in current_map['blocks'][collided_with]['position'])
                         current_map_index += 1
                         map = Map(self.screen, maps[current_map_index])
                     else:
-                        raise 'you won'
+                        raise Exception('you won')
                 
             pygame.display.update()
 
