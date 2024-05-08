@@ -5,6 +5,7 @@ import time
 class Ball():
     def __init__(self, screen, window_scale, start_cordinates):
         self.x, self.y = start_cordinates
+        self.depth = screen.get_height()/2
         self.window_scale = window_scale
         self.abs_x, self.abs_y = [cord * window_scale for cord in start_cordinates]        
         self.screen = screen

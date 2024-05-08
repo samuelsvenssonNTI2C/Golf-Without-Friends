@@ -4,7 +4,6 @@
 
 buggar
     bollen kan stanna 1 pixel över mark
-    när man byter från top till side när bollen står still aktiveras inte gravitation
 
 
 fler banor

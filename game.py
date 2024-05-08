@@ -55,8 +55,14 @@ class Game:
                             pygame.quit()
                             sys.exit()
                         if event.key == pygame.K_f:
-                            sideview = not sideview
-                            golf_ball.in_block = True
+                            if golf_ball.resultant == [0, 0]:
+                                sideview = not sideview
+                                golf_ball.in_block = True
+                                if sideview:
+                                    golf_ball.depth = golf_ball.y
+                                    golf_ball.y = self.screen.get_height() - 16 - golf_ball.radius # put golf ball on ground
+                                else:
+                                    golf_ball.y = golf_ball.depth 
                             
                         if event.key == pygame.K_TAB:
                             if current_map_index < len(maps)-1:
@@ -91,7 +97,7 @@ class Game:
             collided_with = golf_ball.move(hitboxes)
             if collided_with != -1 and collided_with < len(current_map['blocks']):
                 golf_ball.friction(map.materials[current_map['blocks'][collided_with]['type']]['friction'])
-                if current_map['blocks'][collided_with]['type'] == 'victory_block' and math.hypot(golf_ball.resultant[0], golf_ball.resultant[1]) < 0.3:
+                if current_map['blocks'][collided_with]['type'] == 'victory_block':
                     win = True
                     winblock_index = collided_with
 
