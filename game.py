@@ -16,7 +16,6 @@ class Game:
         self.scale = self.display.get_width() / self.screen.get_width()
     def run(self):
         clock = pygame.time.Clock()
-        
         normal_fps = 60
         fast_fps = 600
         fps = normal_fps
@@ -29,6 +28,7 @@ class Game:
         # goal_animation.offsets = (1, 1)
         sideview = True
         win = False
+        font = pygame.font.Font(size = 30)
         
         frame = 0
         
@@ -95,6 +95,7 @@ class Game:
             
             golf_ball.friction(Map.background[current_map['background']]['friction'])  # constant friction from background
             collided_with = golf_ball.move(hitboxes)
+            print(collided_with)
             if collided_with != -1 and collided_with < len(current_map['blocks']):
                 golf_ball.friction(map.materials[current_map['blocks'][collided_with]['type']]['friction'])
                 if current_map['blocks'][collided_with]['type'] == 'victory_block':
@@ -114,9 +115,11 @@ class Game:
                     if current_map_index < len(maps)-1:
                         current_map_index += 1
                         map = Map(self.screen, maps[current_map_index])
+                        golf_ball = Ball(self.screen, self.scale, map.side_map['starting_point'])
                     else:
                         raise Exception('you won')
-                
+                    
+            self.display.blit(font.render('Shots: ' + str(golf_ball.shots), True, (0, 0, 0)), (20, 20))
             pygame.display.update()
 
             clock.tick(fps)      # sets framerate to 60 fps 

@@ -3,7 +3,7 @@ import pygame
 class Map:
     materials = {
         'grass': {
-            'friction': 0.15,
+            'friction': 0.1,
             'side_texture': pygame.image.load('textures/grass_side.png'),
             'top_texture': pygame.image.load('textures/grass_top.png')
         },
@@ -18,7 +18,7 @@ class Map:
             'top_texture': pygame.image.load('textures/sand_top.png')
         },
         'cobblestone': {
-            'friction': 0.15,
+            'friction': 0.1,
             'side_texture': pygame.image.load('textures/cobblestone.png'),
             'top_texture': pygame.image.load('textures/cobblestone.png')
         },
@@ -35,7 +35,7 @@ class Map:
     }
     background = {
         'grass': {
-            'friction': 0.02,
+            'friction': 0.01,
             'texture': pygame.image.load('backgrounds/grass.png')
             },
         'sky': {

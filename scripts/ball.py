@@ -24,6 +24,7 @@ class Ball():
         self.collison_velocity_loss = 0.5
         self.resultant = [0, 0]
         self.in_block = False
+        self.shots = 0
         
     # controls the shootong of the ball and adds a velocity vector to the ball
     def shoot(self):
@@ -54,6 +55,7 @@ class Ball():
             self.selected = False
             self.has_been_selected = False
             self.vectors["velocity"] = [-rel_x, -rel_y]
+            self.shots += 1
     
     # movement of the ball
     def move(self, hitboxes):
@@ -77,10 +79,10 @@ class Ball():
             self.y += self.resultant[1]
             self.abs_x = self.x * self.window_scale
             self.abs_y = self.y * self.window_scale
-            
         
         self.vectors["velocity"] = [0, 0]
 
+        print(self.collision_rect)
         return collided_with
     
     # adds a gravity vector to the ball
@@ -100,18 +102,17 @@ class Ball():
         
         if self.hitbox.collidelist(hitboxes) == -1:
             self.in_block = False
-        
-        if not self.in_block:
+            
             if direction == 'x':
                 test_rect = pygame.Rect([self.hitbox[0] + round_away_from_zero(self.resultant[0]), self.hitbox[1], self.hitbox[2], self.hitbox[3]])
                 self.collision_rect = test_rect.collidelist(hitboxes)
-                if self.collision_rect != -1:                  
+                if self.collision_rect != -1 and not self.in_block:                  
                     self.resultant[0] = -self.resultant[0] * self.collison_velocity_loss
             
             if direction == 'y':
                 test_rect = pygame.Rect([self.hitbox[0], self.hitbox[1] + round_away_from_zero(self.resultant[1]), self.hitbox[2], self.hitbox[3]])
                 self.collision_rect = test_rect.collidelist(hitboxes)
-                if self.collision_rect != -1:
+                if self.collision_rect != -1 and not self.in_block:
                     if self.resultant[1] > 0:   # collision when ball travels down
                         self.on_ground = True
                     
