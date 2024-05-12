@@ -3,13 +3,6 @@
 
 buggar
     bollen kan stanna 1 pixel över mark
-    Ingen gravitaion och friktion i block
-        lösning
-            friktion alltid på
-            gravtiation alltid på i sidoläge
-    kollision när i block
-        lösning
-            ingen kollision i från den blocktyp man är i
 
 
 fler banor

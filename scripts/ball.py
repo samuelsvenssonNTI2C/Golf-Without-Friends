@@ -58,22 +58,22 @@ class Ball():
             self.shots += 1
     
     # movement of the ball
-    def move(self, hitboxes):
-        self.on_ground = False
+    def move(self, hitboxes, map):
+        # self.on_ground = False
         collided_with = -1
         
         for vector in self.vectors:
             self.resultant[0] += self.vectors[vector][0]
             self.resultant[1] += self.vectors[vector][1]
         
-        if math.hypot(self.resultant[0], self.resultant[1]) < self.gravity_acceleration or (self.collision_rect != -1 and math.hypot(self.resultant[0], self.resultant[1]) <= 0.3):
+        if math.hypot(self.resultant[0], self.resultant[1]) < self.gravity_acceleration or (self.on_ground and math.hypot(self.resultant[0], self.resultant[1]) <= 0.3):
             self.resultant = [0, 0]
         else:
-            self.collision('x', hitboxes)
+            self.collision('x', hitboxes, map)
             if self.collision_rect != -1:
                 collided_with = self.collision_rect
             self.x += self.resultant[0]
-            self.collision('y', hitboxes)
+            self.collision('y', hitboxes, map)
             if self.collision_rect != -1:
                 collided_with = self.collision_rect
             self.y += self.resultant[1]
@@ -82,7 +82,6 @@ class Ball():
         
         self.vectors["velocity"] = [0, 0]
 
-        print(self.collision_rect)
         return collided_with
     
     # adds a gravity vector to the ball
@@ -97,26 +96,25 @@ class Ball():
         self.resultant[0] *= (1-friction)
         self.resultant[1] *= (1-friction)
     
-    def collision(self, direction, hitboxes):
+    def collision(self, direction, hitboxes, map):
         self.collision_rect = -1
         
         if self.hitbox.collidelist(hitboxes) == -1:
             self.in_block = False
             
-            if direction == 'x':
-                test_rect = pygame.Rect([self.hitbox[0] + round_away_from_zero(self.resultant[0]), self.hitbox[1], self.hitbox[2], self.hitbox[3]])
-                self.collision_rect = test_rect.collidelist(hitboxes)
-                if self.collision_rect != -1 and not self.in_block:                  
+        if direction == 'x':
+            test_rect = pygame.Rect([self.hitbox[0] + round_away_from_zero(self.resultant[0]), self.hitbox[1], self.hitbox[2], self.hitbox[3]])
+            self.collision_rect = test_rect.collidelist(hitboxes)
+            if self.collision_rect != -1 and (map['blocks'][self.collision_rect]['type'] != map['blocks'][self.hitbox.collidelist(hitboxes)]['type'] or self.hitbox.collidelist(hitboxes) == -1):
                     self.resultant[0] = -self.resultant[0] * self.collison_velocity_loss
-            
-            if direction == 'y':
-                test_rect = pygame.Rect([self.hitbox[0], self.hitbox[1] + round_away_from_zero(self.resultant[1]), self.hitbox[2], self.hitbox[3]])
-                self.collision_rect = test_rect.collidelist(hitboxes)
-                if self.collision_rect != -1 and not self.in_block:
-                    if self.resultant[1] > 0:   # collision when ball travels down
-                        self.on_ground = True
-                    
-                    self.resultant[1] = -self.resultant[1] * self.collison_velocity_loss
+        
+        if direction == 'y':
+            test_rect = pygame.Rect([self.hitbox[0], self.hitbox[1] + round_away_from_zero(self.resultant[1]), self.hitbox[2], self.hitbox[3]])
+            self.collision_rect = test_rect.collidelist(hitboxes)
+            if self.collision_rect != -1 and (map['blocks'][self.collision_rect]['type'] != map['blocks'][self.hitbox.collidelist(hitboxes)]['type'] or self.hitbox.collidelist(hitboxes) == -1):
+                self.resultant[1] = -self.resultant[1] * self.collison_velocity_loss
+    
+            self.on_ground = self.hitbox.move(0, 1).collidelist(hitboxes) != -1 and (map['blocks'][self.collision_rect]['type'] != map['blocks'][self.hitbox.collidelist(hitboxes)]['type'] or self.hitbox.collidelist(hitboxes) == -1)
         
     #draw object and save hitbox
     def update(self):
