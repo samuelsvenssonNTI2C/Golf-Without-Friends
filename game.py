@@ -1,11 +1,9 @@
 import pygame
 import sys
 import json
-import math
 from scripts.ball import Ball
 from scripts.map import Map
 from scripts.animation import Animation
-import time
 
 class Game:
     def __init__(self):
@@ -28,8 +26,6 @@ class Game:
         sideview = True
         win = False
         font = pygame.font.Font(size = 30)
-        
-        frame = 0
         
         while True:
             self.screen.blit(Map.background[current_map['background']]['texture'], (0, 0))
@@ -62,13 +58,6 @@ class Game:
                                     golf_ball.y = self.screen.get_height() - 16 - golf_ball.radius # put golf ball on ground
                                 else:
                                     golf_ball.y = golf_ball.depth 
-                            
-                        if event.key == pygame.K_TAB:
-                            if current_map_index < len(maps)-1:
-                                current_map_index += 1
-                                map = Map(self.screen, maps[current_map_index])
-                            else:
-                                raise 'you won'
                                          
             
             if not sideview:
@@ -104,22 +93,17 @@ class Game:
             self.display.blit(pygame.transform.scale(self.screen, self.display.get_size()), (0, 0))
             
             if win:
-                goal_animation.draw(([cord * 16 * self.scale for cord in current_map['blocks'][winblock_index]['position']]), frame)
-                if frame < goal_animation.number_of_frames-1:
-                    frame += 1
-                else:
+                if goal_animation.draw(([cord * 16 * self.scale for cord in current_map['blocks'][winblock_index]['position']])):
                     win = False
                     if current_map_index < len(maps)-1:
                         current_map_index += 1
                         map = Map(self.screen, maps[current_map_index])
                         golf_ball = Ball(self.screen, self.scale, map.side_map['starting_point'])
                         sideview = True
-                    else:
-                        raise Exception('you won')
                     
             self.display.blit(font.render('Shots: ' + str(golf_ball.shots), True, (0, 0, 0)), (20, 20))
             pygame.display.update()
 
-            clock.tick(fps)      # sets framerate to 60 fps 
+            clock.tick(fps)      # sets framerate
 
 Game().run()
