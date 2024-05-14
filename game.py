@@ -31,7 +31,7 @@ class Game:
                 case pygame.MOUSEBUTTONDOWN:
                     if self.golf_ball.resultant == [0, 0]:
                         self.golf_ball.selected = True
-                        
+                
                 case pygame.KEYUP:
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
@@ -113,16 +113,16 @@ class Game:
             hitboxes, current_map = self.draw_map(map)
             
             self.user_input()
-                                         
+            
             if not self.sideview:
                 self.golf_ball.on_ground = True 
             self.golf_ball.gravity()
             
             if self.golf_ball.selected == True:
-                self.golf_ball.shoot()           
-                    
+                self.golf_ball.shoot()
+            
             winblock_index = self.movement(map, hitboxes, current_map)
-
+            
             self.golf_ball.update()
             
             self.display.blit(pygame.transform.scale(self.screen, self.display.get_size()), (0, 0))
@@ -134,7 +134,7 @@ class Game:
                     
             self.display.blit(font.render('Shots: ' + str(self.golf_ball.shots), True, (0, 0, 0)), (20, 20))
             pygame.display.update()
-
+            
             clock.tick(fps) # sets framerate
 
 Game().run()    # Starts the game

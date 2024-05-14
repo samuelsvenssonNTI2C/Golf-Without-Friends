@@ -50,7 +50,7 @@ class Ball():
             strength = max_strength
         
         # shoot power line
-        if strength < max_strength/2:        # line color changes based on velocity: g -> low, b -> mid, r -> high
+        if strength < max_strength/2:   # line color changes based on velocity: g -> low, b -> mid, r -> high
             pygame.draw.line(self.screen, (0, 255 - 255*(strength/(max_strength/2)), 255*(strength/(max_strength/2))), (self.start_x/self.window_scale - 1, self.start_y/self.window_scale - 1), (x/self.window_scale, y/self.window_scale), 2)
         else:
             pygame.draw.line(self.screen, (255*(((strength-max_strength/2)*2)/max_strength), 0, 255 - 255*(((strength-max_strength/2)*2)/max_strength)), (self.start_x/self.window_scale - 1, self.start_y/self.window_scale - 1), (x/self.window_scale, y/self.window_scale), 2)
@@ -125,7 +125,7 @@ class Ball():
         
         if self.hitbox.collidelist(hitboxes) == -1:
             self.in_block = False
-            
+        
         if direction == 'x':
             test_rect = pygame.Rect([self.hitbox[0] + round_away_from_zero(self.resultant[0]), self.hitbox[1], self.hitbox[2], self.hitbox[3]])
             self.collision_rect = test_rect.collidelist(hitboxes)
@@ -137,7 +137,7 @@ class Ball():
             self.collision_rect = test_rect.collidelist(hitboxes)
             if self.collision_rect != -1 and (map['blocks'][self.collision_rect]['type'] != map['blocks'][self.hitbox.collidelist(hitboxes)]['type'] or self.hitbox.collidelist(hitboxes) == -1):
                 self.resultant[1] = -self.resultant[1] * self.collison_velocity_loss
-    
+            
             self.on_ground = self.hitbox.move(0, 1).collidelist(hitboxes) != -1 and (map['blocks'][self.collision_rect]['type'] != map['blocks'][self.hitbox.collidelist(hitboxes)]['type'] or self.hitbox.collidelist(hitboxes) == -1)
     
     
@@ -145,8 +145,8 @@ class Ball():
     # Returns: None
     def update(self):
         self.hitbox = pygame.draw.circle(self.screen, (255, 255, 255), (self.x, self.y), self.radius)
-
-
+    
+    
 # Rounds a number away from zero
 # Parameters
 #   - float num
@@ -158,4 +158,3 @@ def round_away_from_zero(num: float):
         return math.ceil(num)
     else:
         return 0
-    
