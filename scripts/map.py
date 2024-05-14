@@ -48,7 +48,12 @@ class Map:
             }
     }
     
-    def __init__(self, screen, dict):
+    # Intitilizes a map and saves hitboxes and textures in lists
+    # Parameters:
+    #   - Surface screen
+    #   - dict dict
+    # Returns: None
+    def __init__(self, screen: pygame.Surface, dict: dict):
         self.screen = screen
         self.side_map = dict['side']
         self.top_map = dict['top']
@@ -65,11 +70,15 @@ class Map:
             rect = pygame.Rect([map_object['position'][0]*16, map_object['position'][1]*16, 16, 16])
             self.top_hitboxes.append(rect)
             self.top_textures.append(Map.materials[map_object['type']]['top_texture'])
-            
+    
+    # Draws the side map of the map
+    # Returns: None
     def draw_side(self):
         for object in self.side_hitboxes:
             self.screen.blit(self.side_textures[self.side_hitboxes.index(object)], (object[0], object[1]))
     
+    # Draws the top map of the map
+    # Returns: None
     def draw_top(self):
         for object in self.top_hitboxes:
             self.screen.blit(self.top_textures[self.top_hitboxes.index(object)], (object[0], object[1]))

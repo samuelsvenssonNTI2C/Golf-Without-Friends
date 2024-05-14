@@ -1,13 +1,18 @@
 import pygame
 import math
-import time
 
 class Ball():
-    def __init__(self, screen, window_scale, start_cordinates):
-        self.x, self.y = start_cordinates
+    # Intitilizes an ball class
+    # Parameters:
+    #   - Surface screen
+    #   - float window_scale
+    #   - list start_coordinates
+    # Returns: None
+    def __init__(self, screen: pygame.Surface, window_scale: float, start_coordinates: list):
+        self.x, self.y = start_coordinates
         self.depth = screen.get_height()/2
         self.window_scale = window_scale
-        self.abs_x, self.abs_y = [cord * window_scale for cord in start_cordinates]        
+        self.abs_x, self.abs_y = [coord * window_scale for coord in start_coordinates]        
         self.screen = screen
         self.selected = False
         self.has_been_selected = False
@@ -26,7 +31,8 @@ class Ball():
         self.in_block = False
         self.shots = 0
         
-    # controls the shootong of the ball and adds a velocity vector to the ball
+    # Controls the shootong of the ball and adds a velocity vector to the ball
+    # Returns: None
     def shoot(self):
         velocity_factor = 0.010
         max_strength = 2       # max velocity
@@ -34,7 +40,6 @@ class Ball():
         if not self.has_been_selected:
             self.start_x, self.start_y = pygame.mouse.get_pos()
         self.has_been_selected = True
-        # x, y offset from object
         rel_x = (x - self.start_x)*velocity_factor
         rel_y = (y - self.start_y)*velocity_factor
         strength = math.hypot(rel_x, rel_y)
@@ -58,7 +63,12 @@ class Ball():
             self.shots += 1
     
     # movement of the ball
-    def move(self, hitboxes, map):
+    # Controls the movement of the ball and checks for collisions
+    # Parameters:
+    #   - list hitboxes
+    #   - dict map
+    # Returns: int
+    def move(self, hitboxes: list, map: dict):
         collided_with = -1
         
         for vector in self.vectors:
@@ -83,20 +93,29 @@ class Ball():
 
         return collided_with
     
-    # adds a gravity vector to the ball
+    # Adds a gravity vector to the ball
+    # Returns: None
     def gravity(self):
         if not self.on_ground:
             self.vectors["gravity"][1] = self.gravity_acceleration
         else:
             self.vectors["gravity"][1] = 0
     
-    # reduces the balls speed based on object it contacts
-    def friction(self, friction):
+    # Reduces the balls speed based the object it contacts
+    # Parameters:
+    #   - float friction
+    # Returns None
+    def friction(self, friction: float):
         friction *= 1 if self.in_block else 1
         self.resultant[0] *= (1-friction)
         self.resultant[1] *= (1-friction)
     
-    def collision(self, direction, hitboxes, map):
+    # Checks if the ball collides with any hitbox
+    #   - str direction
+    #   - list hitboxes
+    #   - dict map
+    # Returns: None
+    def collision(self, direction: str, hitboxes: list, map: dict):
         self.collision_rect = -1
         
         if self.hitbox.collidelist(hitboxes) == -1:
@@ -116,15 +135,20 @@ class Ball():
     
             self.on_ground = self.hitbox.move(0, 1).collidelist(hitboxes) != -1 and (map['blocks'][self.collision_rect]['type'] != map['blocks'][self.hitbox.collidelist(hitboxes)]['type'] or self.hitbox.collidelist(hitboxes) == -1)
         
-    #draw object and save hitbox
+    # Draws the ball and saves its hitbox
+    # Returns: None
     def update(self):
         self.hitbox = pygame.draw.circle(self.screen, (255, 255, 255), (self.x, self.y), self.radius)
 
-def round_away_from_zero(var):
-    if var < 0:
-        return math.floor(var)
-    elif var > 0:
-        return math.ceil(var)
+# Rounds a number away from zero
+# Parameters
+#   - float num
+# Returns int
+def round_away_from_zero(num: float):
+    if num < 0:
+        return math.floor(num)
+    elif num > 0:
+        return math.ceil(num)
     else:
         return 0
     

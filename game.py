@@ -13,7 +13,7 @@ from scripts.animation import Animation
 
 class Game:
     
-    # Intitilzes the game with pygame and 
+    # Intitilizes the game with pygame and declares some variables
     # Returns: None
     def __init__(self):
         pygame.init()
@@ -24,7 +24,8 @@ class Game:
         self.current_map_index = -1
         self.win = False
         
-        
+    # Handles the input from the player and changes the relevant varibles
+    # Returns: None
     def user_input(self):
         for event in pygame.event.get():
             match event.type:
@@ -49,8 +50,12 @@ class Game:
                                 self.golf_ball.y = self.screen.get_height() - 16 - self.golf_ball.radius # put golf ball on ground
                             else:
                                 self.golf_ball.y = self.golf_ball.depth
-                                
-    def draw_map(self, map):
+    
+    # Draws the map and return the hitboxes of the map and the current map
+    # Parameters:
+    #   - Map map
+    # Returns: list hitboxes, dict current_map
+    def draw_map(self, map: Map):
         if self.sideview:
             map.draw_side()
             hitboxes = map.side_hitboxes
@@ -60,7 +65,9 @@ class Game:
             hitboxes = map.top_hitboxes
             current_map = map.top_map
         return hitboxes, current_map
-            
+
+    # Changes the map to the next and resets the ball and sets the view to sideview
+    # Returns: Map
     def next_map(self):
         maps = json.load(open('maps.json'))
         if self.current_map_index < len(maps)-1:
@@ -71,8 +78,14 @@ class Game:
             return map
         else:
             raise Exception('No more maps')
-        
-    def movement(self, map, hitboxes, current_map):
+    
+    # Controls the movement of the ball and its collisions If the ball gets to the goal it returns the block index of the goal 
+    # Parameters:
+    #   - Map map
+    #   - list hitboxes
+    #   - dict current_map
+    # Returns: int
+    def movement(self, map: Map, hitboxes: list, current_map: dict):
         winblock_index = -1
         self.golf_ball.friction(Map.background[current_map['background']]['friction'])  # constant friction from background
         collided_with = self.golf_ball.move(hitboxes, current_map)
@@ -87,14 +100,15 @@ class Game:
     # The main game
     # Returns: None
     def run(self):
+        # Declares varibles
         clock = pygame.time.Clock()
         fps = 60
-        # self.golf_ball = Ball(self.screen, self.scale, map.side_map['starting_point'])
         goal_animation = Animation(self.display, 'animations/goal_confetti', 0.4, (-64, -100))
         map = self.next_map()
         font = pygame.font.Font(size = 30)
         hitboxes, current_map = self.draw_map(map)
         
+        # Main loop
         while True:
             self.screen.blit(Map.background[current_map['background']]['texture'], (0, 0))
             hitboxes, current_map = self.draw_map(map)
@@ -115,13 +129,13 @@ class Game:
             self.display.blit(pygame.transform.scale(self.screen, self.display.get_size()), (0, 0))
             
             if self.win:
-                if goal_animation.draw(([cord * 16 * self.scale for cord in current_map['blocks'][winblock_index]['position']])):
+                if goal_animation.draw(([coord * 16 * self.scale for coord in current_map['blocks'][winblock_index]['position']])):
                     self.win = False
                     map = self.next_map()
                     
             self.display.blit(font.render('Shots: ' + str(self.golf_ball.shots), True, (0, 0, 0)), (20, 20))
             pygame.display.update()
 
-            clock.tick(fps)      # sets framerate
+            clock.tick(fps) # sets framerate
 
 Game().run()    # Starts the game
