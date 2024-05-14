@@ -18,6 +18,7 @@ class Animation():
         self.number_of_frames = len(self.images)
         self.frame = 0
     
+    
     # Draws out one frame of the animation, increases frame counter and returns True if animation is finished
     # Parameters:
     #   - list coordinates

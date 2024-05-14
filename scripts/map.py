@@ -33,6 +33,7 @@ class Map:
             'top_texture': pygame.image.load('textures/victory_block.png')
         }
     }
+    
     background = {
         'grass': {
             'friction': 0.01,
@@ -47,6 +48,7 @@ class Map:
             'texture': pygame.image.load('backgrounds/ice.png')
             }
     }
+    
     
     # Intitilizes a map and saves hitboxes and textures in lists
     # Parameters:
@@ -71,11 +73,13 @@ class Map:
             self.top_hitboxes.append(rect)
             self.top_textures.append(Map.materials[map_object['type']]['top_texture'])
     
+    
     # Draws the side map of the map
     # Returns: None
     def draw_side(self):
         for object in self.side_hitboxes:
             self.screen.blit(self.side_textures[self.side_hitboxes.index(object)], (object[0], object[1]))
+    
     
     # Draws the top map of the map
     # Returns: None

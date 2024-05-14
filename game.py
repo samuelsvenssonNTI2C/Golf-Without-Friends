@@ -5,12 +5,6 @@ from scripts.ball import Ball
 from scripts.map import Map
 from scripts.animation import Animation
 
-
-# Writes position to servo on y-axis
-# Parameters:
-#   - int pos
-# Returns: void
-
 class Game:
     
     # Intitilizes the game with pygame and declares some variables
@@ -23,7 +17,8 @@ class Game:
         self.sideview = True
         self.current_map_index = -1
         self.win = False
-        
+    
+    
     # Handles the input from the player and changes the relevant varibles
     # Returns: None
     def user_input(self):
@@ -51,6 +46,7 @@ class Game:
                             else:
                                 self.golf_ball.y = self.golf_ball.depth
     
+    
     # Draws the map and return the hitboxes of the map and the current map
     # Parameters:
     #   - Map map
@@ -66,6 +62,7 @@ class Game:
             current_map = map.top_map
         return hitboxes, current_map
 
+    
     # Changes the map to the next and resets the ball and sets the view to sideview
     # Returns: Map
     def next_map(self):
@@ -78,6 +75,7 @@ class Game:
             return map
         else:
             raise Exception('No more maps')
+    
     
     # Controls the movement of the ball and its collisions If the ball gets to the goal it returns the block index of the goal 
     # Parameters:
@@ -96,6 +94,7 @@ class Game:
                 self.win = True
                 winblock_index = collided_with
         return winblock_index
+    
     
     # The main game
     # Returns: None

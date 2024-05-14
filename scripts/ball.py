@@ -30,7 +30,8 @@ class Ball():
         self.resultant = [0, 0]
         self.in_block = False
         self.shots = 0
-        
+    
+    
     # Controls the shootong of the ball and adds a velocity vector to the ball
     # Returns: None
     def shoot(self):
@@ -61,6 +62,7 @@ class Ball():
             self.has_been_selected = False
             self.vectors["velocity"] = [-rel_x, -rel_y]
             self.shots += 1
+    
     
     # movement of the ball
     # Controls the movement of the ball and checks for collisions
@@ -93,6 +95,7 @@ class Ball():
 
         return collided_with
     
+    
     # Adds a gravity vector to the ball
     # Returns: None
     def gravity(self):
@@ -100,6 +103,7 @@ class Ball():
             self.vectors["gravity"][1] = self.gravity_acceleration
         else:
             self.vectors["gravity"][1] = 0
+    
     
     # Reduces the balls speed based the object it contacts
     # Parameters:
@@ -109,6 +113,7 @@ class Ball():
         friction *= 1 if self.in_block else 1
         self.resultant[0] *= (1-friction)
         self.resultant[1] *= (1-friction)
+    
     
     # Checks if the ball collides with any hitbox
     #   - str direction
@@ -134,11 +139,13 @@ class Ball():
                 self.resultant[1] = -self.resultant[1] * self.collison_velocity_loss
     
             self.on_ground = self.hitbox.move(0, 1).collidelist(hitboxes) != -1 and (map['blocks'][self.collision_rect]['type'] != map['blocks'][self.hitbox.collidelist(hitboxes)]['type'] or self.hitbox.collidelist(hitboxes) == -1)
-        
+    
+    
     # Draws the ball and saves its hitbox
     # Returns: None
     def update(self):
         self.hitbox = pygame.draw.circle(self.screen, (255, 255, 255), (self.x, self.y), self.radius)
+
 
 # Rounds a number away from zero
 # Parameters
