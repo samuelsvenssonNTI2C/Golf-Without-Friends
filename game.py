@@ -25,7 +25,6 @@ class Game:
         current_map = map.side_map
         golf_ball = Ball(self.screen, self.scale, map.side_map['starting_point'])
         goal_animation = Animation(self.display, 'animations/goal_confetti', 0.4, (-64, -100))
-        # goal_animation.offsets = (1, 1)
         sideview = True
         win = False
         font = pygame.font.Font(size = 30)
