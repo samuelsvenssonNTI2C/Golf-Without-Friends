@@ -10,8 +10,8 @@ class Game:
         pygame.init()
         self.screen = pygame.Surface((256, 144))
         self.display = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-        # self.display = pygame.display.set_mode((512, 288))
         self.scale = self.display.get_width() / self.screen.get_width()
+        
     def run(self):
         clock = pygame.time.Clock()
         normal_fps = 60
@@ -59,12 +59,10 @@ class Game:
                                 else:
                                     golf_ball.y = golf_ball.depth 
                                          
-            
             if not sideview:
                 golf_ball.on_ground = True
                 
             golf_ball.gravity()
-            
             
             if sideview:
                 map.draw_side()
@@ -74,7 +72,6 @@ class Game:
                 map.draw_top()
                 hitboxes = map.top_hitboxes
                 current_map = map.top_map
-            
             
             if golf_ball.selected == True:
                 golf_ball.shoot()           

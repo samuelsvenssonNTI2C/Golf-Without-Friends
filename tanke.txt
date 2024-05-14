@@ -5,9 +5,6 @@ buggar
     bollen kan stanna 1 pixel över mark
 
 
-fler banor
-
-
 (meny)
     välja bana
     knappar
