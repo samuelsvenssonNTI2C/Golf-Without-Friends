@@ -59,7 +59,6 @@ class Ball():
     
     # movement of the ball
     def move(self, hitboxes, map):
-        # self.on_ground = False
         collided_with = -1
         
         for vector in self.vectors:
@@ -74,7 +73,7 @@ class Ball():
                 collided_with = self.collision_rect
             self.x += self.resultant[0]
             self.collision('y', hitboxes, map)
-            if self.collision_rect != -1:
+            if self.collision_rect != -1 and (map['blocks'][collided_with]['type'] != 'victory_block' or collided_with == -1):
                 collided_with = self.collision_rect
             self.y += self.resultant[1]
             self.abs_x = self.x * self.window_scale
@@ -93,6 +92,7 @@ class Ball():
     
     # reduces the balls speed based on object it contacts
     def friction(self, friction):
+        friction *= 1 if self.in_block else 1
         self.resultant[0] *= (1-friction)
         self.resultant[1] *= (1-friction)
     

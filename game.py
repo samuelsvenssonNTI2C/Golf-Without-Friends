@@ -92,8 +92,9 @@ class Game:
             
             golf_ball.friction(Map.background[current_map['background']]['friction'])  # constant friction from background
             collided_with = golf_ball.move(hitboxes, current_map)
-            if collided_with != -1 and collided_with < len(current_map['blocks']) and (not golf_ball.in_block and sideview):
-                golf_ball.friction(map.materials[current_map['blocks'][collided_with]['type']]['friction'])
+            if collided_with != -1 and collided_with < len(current_map['blocks']):
+                if not golf_ball.in_block and sideview:
+                    golf_ball.friction(map.materials[current_map['blocks'][collided_with]['type']]['friction'])
                 if current_map['blocks'][collided_with]['type'] == 'victory_block':
                     win = True
                     winblock_index = collided_with
@@ -112,6 +113,7 @@ class Game:
                         current_map_index += 1
                         map = Map(self.screen, maps[current_map_index])
                         golf_ball = Ball(self.screen, self.scale, map.side_map['starting_point'])
+                        sideview = True
                     else:
                         raise Exception('you won')
                     
