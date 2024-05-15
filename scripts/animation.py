@@ -1,7 +1,10 @@
 import os
 import pygame
 
+# An animation class which can handle an animation
+# Returns: class Animation
 class Animation():
+    
     # Intitilizes an animation class
     # Parameters:
     #   - Surface screen

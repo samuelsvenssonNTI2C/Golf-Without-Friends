@@ -1,7 +1,10 @@
 import pygame
 import math
 
+# A class for the ball. Contains all the methods for controling the ball and its collision
+# Returns class Ball
 class Ball():
+    
     # Intitilizes an ball class
     # Parameters:
     #   - Surface screen

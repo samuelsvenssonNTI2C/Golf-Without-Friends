@@ -1,5 +1,7 @@
 import pygame
 
+# A class for handling the map. Saves the map and can draw both side and top perspectives
+# Returns: class Map
 class Map:
     materials = {
         'grass': {

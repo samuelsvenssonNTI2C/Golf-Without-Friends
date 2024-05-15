@@ -5,6 +5,8 @@ from scripts.ball import Ball
 from scripts.map import Map
 from scripts.animation import Animation
 
+# The main game class. Contains all game wide methods and a run method which starts the game
+# Returns: class Game
 class Game:
     
     # Intitilizes the game with pygame and declares some variables
@@ -134,7 +136,7 @@ class Game:
                     
             self.display.blit(font.render('Shots: ' + str(self.golf_ball.shots), True, (0, 0, 0)), (20, 20))
             pygame.display.update()
-            
+
             clock.tick(fps) # sets framerate
 
 Game().run()    # Starts the game

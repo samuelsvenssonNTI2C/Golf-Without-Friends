@@ -1,0 +1,8 @@
+Welcome to Golf Without Friends
+This is a puzzel golf game where you have to use 2 perspectives to get to the flag
+Your goal is to get to the last map
+
+Game controls:
+Shoot - click and drag with left mousebutton
+Switch perspective - f
+Quit - escape
